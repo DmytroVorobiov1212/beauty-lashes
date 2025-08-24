@@ -1,0 +1,211 @@
+.section {
+    position: relative;
+    scroll-margin-top: calc(var(--header-h) + 8px);
+    padding: var(--space-8) 0;
+    /* щоб було повітря */
+    background: none;
+    /* фон беремо з body */
+    isolation: isolate;
+    /* власний малий стек */
+}
+
+/* делікатне світло “під” секцією */
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    /* два ореоли + плавне затирання країв через mask */
+    background:
+        radial-gradient(42rem 20rem at 10% -12%, rgba(167, 139, 250, .12), rgba(167, 139, 250, 0) 60%) no-repeat,
+        radial-gradient(50rem 24rem at 92% -18%, rgba(124, 58, 237, .10), rgba(124, 58, 237, 0) 65%) no-repeat;
+
+    /* м’яко ховаємо світло зверху/знизу, щоб не різало секції */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+.title {
+    margin: 0 0 14px;
+    font-size: clamp(24px, 2.8vw, 32px);
+    color: #fff;
+}
+
+/* glass-картка секції */
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow);
+    padding: 16px;
+}
+
+.grid {
+    display: grid;
+    gap: 14px;
+}
+
+.mono {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .2px;
+}
+
+.ico svg {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .card {
+        padding: 18px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1.2fr;
+        /* інфо : карта */
+        gap: 16px;
+        align-items: start;
+    }
+
+    .section {
+        padding: var(--space-10) 0;
+    }
+
+    .section::before {
+        background:
+            radial-gradient(52rem 26rem at 10% -14%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+            radial-gradient(60rem 30rem at 92% -18%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    }
+}
+
+/* інформаційні рядки */
+/* інформаційні рядки — охайний стовпчик з роздільниками */
+.info {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    position: relative;
+}
+
+/* рівний ритм усередині .info: прибираємо зовнішні марджини .row і даємо внутрішні відступи */
+.info .row {
+    margin: 0;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, .12);
+}
+
+.info .row:last-child {
+    border-bottom: 0;
+}
+
+/* акцентна вертикальна смужка для візуальної ієрархії (з 768px) */
+@media (min-width: 768px) {
+    .info {
+        padding-left: 12px;
+    }
+
+    .info::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 6px;
+        bottom: 6px;
+        width: 2px;
+        border-radius: 2px;
+        background: linear-gradient(180deg, var(--accent), var(--accent-2));
+        opacity: .7;
+    }
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    color: var(--text);
+    flex-wrap: wrap;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex: none;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    box-shadow: 0 4px 10px rgba(124, 58, 237, .35);
+}
+
+.row strong {
+    color: #fff;
+}
+
+.addr {
+    color: var(--muted);
+}
+
+/* посилання */
+.link {
+    color: #fff;
+    text-decoration: none;
+    padding: 2px 0;
+    position: relative;
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .22s ease;
+}
+
+.link:hover::after {
+    transform: scaleX(1);
+}
+
+/* карта */
+.mapWrap {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    background: rgba(255, 255, 255, .03);
+    box-shadow: var(--shadow-soft);
+}
+
+.map {
+    display: block;
+    width: 100%;
+    height: 320px;
+    border: 0;
+}
+
+@media (min-width: 768px) {
+    .map {
+        height: 360px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .map {
+        height: 420px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .section {
+        padding: var(--space-12) 0;
+    }
+
+    .section::before {
+        background:
+            radial-gradient(64rem 30rem at 10% -16%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+            radial-gradient(74rem 36rem at 92% -20%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    }
+}

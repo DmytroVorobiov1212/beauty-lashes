@@ -1,0 +1,128 @@
+/* src/components/NavBar/NavBar.module.css */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 80;
+
+    /* glass */
+    background: var(--card);
+    backdrop-filter: saturate(160%) blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+}
+
+.row {
+    min-height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+/* ── Logo ─────────────────────────────────────────────── */
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    padding: 6px 8px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background .2s ease;
+}
+
+.brand:hover {
+    background: rgba(255, 255, 255, .05);
+}
+
+.brandImg {
+    width: 40px;
+    /* під контролем CSS */
+    height: 40px;
+    border-radius: 8px;
+    /* якщо хочеш коло — постав 50% */
+    object-fit: cover;
+    border: 1px solid var(--border);
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .35));
+}
+
+
+/* ── Links ────────────────────────────────────────────── */
+.links {
+    display: none;
+    gap: 22px;
+    margin-left: 8px;
+}
+
+.links a {
+    position: relative;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 10px 8px;
+    border-radius: 10px;
+    transition: color .2s ease, background .2s ease;
+}
+
+.links a:hover {
+    color: #fff;
+    /* background: rgba(167, 139, 250, .12); */
+    background: var(--accent-a12);
+}
+
+/* underline animation */
+.links a::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 6px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .22s ease;
+}
+
+.links a:hover::after {
+    transform: scaleX(1);
+}
+
+@media (min-width: 768px) {
+    .links {
+        display: inline-flex;
+    }
+}
+
+/* .spacer {
+    flex: 1;
+} */
+
+/* ── CTA phone ───────────────────────────────────────── */
+.cta {
+    display: none;
+    padding: 10px 14px;
+    border-radius: 999px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.cta:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+.cta:active {
+    transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+    .cta {
+        display: inline-block;
+    }
+}

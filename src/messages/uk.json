@@ -1,0 +1,45 @@
+{
+  "Nav": {
+    "contact": "Контакти"
+  },
+  "Hero": {
+    "title": "Ідеальні вії у Таборі",
+    "subtitle": "Класика, 2D/3D та ламінування — безпечно, зручно, довговічно.",
+    "cta": "Подзвонити"
+  },
+  "Services": {
+    "title": "Послуги",
+    "item1": "Класика — природний вигляд",
+    "item2": "2D / 3D — виразні пучки",
+    "item3": "Ламінування — підкручування та живлення"
+  },
+  "Gallery": {
+    "title": "Наші роботи"
+  },
+  "Contact": {
+    "title": "Контакти",
+    "phoneLabel": "Телефон",
+    "instaLabel": "Інстаграм",
+    "emailLabel": "E-mail",
+    "operatorLabel": "Власниця",
+    "icoLabel": "IČO",
+    "addressLabel": "Адреса",
+    "address": "Hradební 129/1, Tábor 1",
+    "mapOpen": "Відкрити в Google Картах"
+  },
+  "Prices": {
+    "title": "Ціни",
+    "items": {
+      "classic": "Класика",
+      "2d3d": "2D–3D",
+      "wetEffect": "Вологий ефект",
+      "4d5d": "4D–5D",
+      "volume": "Обʼєм (Volume)",
+      "removal": "Зняття вій"
+    },
+    "note": "Ціни в CZK."
+  },
+  "Footer": {
+    "copyright": "© {year} Dmytro Vorobiov. Усі права захищені."
+  }
+}

@@ -1,0 +1,93 @@
+.section {
+    position: relative;
+    overflow: clip;
+    scroll-margin-top: calc(var(--header-h) + 8px);
+
+    /* висота блоку під героїчний кадр */
+    min-height: clamp(520px, 85vh, 880px);
+    padding-block: clamp(32px, 6vh, 72px);
+
+    /* фонове фото на всю ширину + легкий градієнт для читабельності тексту */
+    background:
+        linear-gradient(90deg,
+            rgba(59, 47, 47, .85) 0%,
+            /* темніше біля обличчя зліва */
+            rgba(59, 47, 47, .55) 28%,
+            rgba(59, 47, 47, .25) 55%,
+            rgba(59, 47, 47, 0) 72%),
+        url('/hero/hero-bg.jpg') left center / cover no-repeat;
+}
+
+/* контент з правого краю контейнера, аби не закривати обличчя */
+.inner {
+    margin-left: auto;
+    /* штовхає блок вправо всередині .container */
+    max-width: 680px;
+    padding: 12px 0 8px;
+}
+
+/* заголовок із градієнтом */
+.title {
+    margin: 0 0 10px;
+    font-size: clamp(32px, 4.2vw, 56px);
+    line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, #e9e3ff 40%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, .28);
+}
+
+.subtitle {
+    margin: 0 0 16px;
+    color: var(--muted);
+    max-width: 60ch;
+}
+
+/* CTA-таблетка */
+.cta {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent-2), var(--accent));
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+.cta:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+}
+
+.cta:active {
+    transform: translateY(0);
+}
+
+.cta:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* адаптація */
+@media (max-width: 767.98px) {
+    .section {
+        /* трохи зрушуємо фокус кадру правіше, щоб око лишалось у видимій зоні */
+        background-position: 20% center, 20% center;
+        min-height: 70vh;
+    }
+
+    .inner {
+        margin-left: 0;
+        /* на мобі — стандартний потік */
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1440px) {
+    .section {
+        padding-block: 80px;
+    }
+}

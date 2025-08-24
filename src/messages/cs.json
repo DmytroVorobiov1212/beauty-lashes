@@ -1,0 +1,45 @@
+{
+  "Nav": {
+    "contact": "Kontakty"
+  },
+  "Hero": {
+    "title": "Dokonalé řasy v Táboře",
+    "subtitle": "Klasika, 2D/3D a laminace — bezpečně, pohodlně, dlouhá výdrž.",
+    "cta": "Zavolat"
+  },
+  "Services": {
+    "title": "Služby",
+    "item1": "Klasika — přirozený vzhled",
+    "item2": "2D / 3D — výrazné vějířky",
+    "item3": "Laminace — natočení a výživa"
+  },
+  "Gallery": {
+    "title": "Naše práce"
+  },
+  "Contact": {
+    "title": "Kontakty",
+    "phoneLabel": "Telefon",
+    "instaLabel": "Instagram",
+    "emailLabel": "E-mail",
+    "operatorLabel": "Provozovatel",
+    "icoLabel": "IČO",
+    "addressLabel": "Adresa",
+    "address": "Hradební 129/1, Tábor 1",
+    "mapOpen": "Otevřít v Mapách Google"
+  },
+  "Prices": {
+    "title": "Ceník",
+    "items": {
+      "classic": "Klasika",
+      "2d3d": "2D–3D",
+      "wetEffect": "Mokrý efekt",
+      "4d5d": "4D–5D",
+      "volume": "Walumme",
+      "removal": "Odstranění řas"
+    },
+    "note": "Ceny jsou uvedeny v Kč."
+  },
+  "Footer": {
+    "copyright": "© {year} Dmytro Vorobiov. Všechna práva vyhrazena."
+  }
+}

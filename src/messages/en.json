@@ -1,0 +1,45 @@
+{
+  "Nav": {
+    "contact": "Contact"
+  },
+  "Hero": {
+    "title": "Perfect lashes in Tábor",
+    "subtitle": "Classic, 2D/3D & lamination — safe, comfy, long-lasting.",
+    "cta": "Call now"
+  },
+  "Services": {
+    "title": "Services",
+    "item1": "Classic — natural look",
+    "item2": "2D / 3D — expressive fans",
+    "item3": "Lamination — curl & nourish"
+  },
+  "Gallery": {
+    "title": "Our work"
+  },
+  "Contact": {
+    "title": "Contacts",
+    "phoneLabel": "Phone",
+    "instaLabel": "Instagram",
+    "emailLabel": "Email",
+    "operatorLabel": "Operator",
+    "icoLabel": "Company ID (IČO)",
+    "addressLabel": "Address",
+    "address": "Hradební 129/1, Tábor 1",
+    "mapOpen": "Open in Google Maps"
+  },
+  "Prices": {
+    "title": "Price list",
+    "items": {
+      "classic": "Classic",
+      "2d3d": "2D–3D",
+      "wetEffect": "Wet effect",
+      "4d5d": "4D–5D",
+      "volume": "Volume",
+      "removal": "Removal"
+    },
+    "note": "Prices in CZK."
+  },
+  "Footer": {
+    "copyright": "© {year} Dmytro Vorobiov. All rights reserved."
+  }
+}

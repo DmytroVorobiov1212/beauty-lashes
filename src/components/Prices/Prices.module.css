@@ -1,0 +1,121 @@
+.section {
+    position: relative;
+    scroll-margin-top: calc(var(--header-h) + 8px);
+    padding: var(--space-8) 0;
+    /* щоб було повітря */
+    background: none;
+    /* фон беремо з body */
+    isolation: isolate;
+    /* власний малий стек */
+}
+
+/* делікатне світло “під” секцією */
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    /* два ореоли + плавне затирання країв через mask */
+    background:
+        radial-gradient(42rem 20rem at 10% -12%, rgba(167, 139, 250, .12), rgba(167, 139, 250, 0) 60%) no-repeat,
+        radial-gradient(50rem 24rem at 92% -18%, rgba(124, 58, 237, .10), rgba(124, 58, 237, 0) 65%) no-repeat;
+
+    /* м’яко ховаємо світло зверху/знизу, щоб не різало секції */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+.title {
+    margin: 0 0 14px;
+    font-size: clamp(24px, 2.8vw, 32px);
+    letter-spacing: -.01em;
+    color: #fff;
+}
+
+/* скляна картка */
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+/* “псевдо-таблиця” з гарною адаптивністю */
+.table {
+    display: grid;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px dashed rgba(255, 255, 255, .12);
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.row:last-child {
+    border-bottom: 0;
+}
+
+.row:hover {
+    background: rgba(255, 255, 255, .04);
+    border-color: rgba(167, 139, 250, .35);
+}
+
+/* клітинки */
+.cellName {
+    color: var(--text);
+}
+
+.cellPrice {
+    font-weight: 800;
+    white-space: nowrap;
+    color: #fff;
+    letter-spacing: .2px;
+    /* легкий градієнтний акцент тексту ціни */
+    background: linear-gradient(135deg, #fff 0%, #e9e3ff 40%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+}
+
+/* адаптація */
+@media (min-width: 768px) {
+    .row {
+        padding: 16px 22px;
+    }
+
+    .section {
+        padding: var(--space-10) 0;
+    }
+
+    .section::before {
+        background:
+            radial-gradient(52rem 26rem at 10% -14%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+            radial-gradient(60rem 30rem at 92% -18%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    }
+}
+
+@media (min-width: 1440px) {
+    .section {
+        padding: var(--space-12) 0;
+    }
+
+    .section::before {
+        background:
+            radial-gradient(64rem 30rem at 10% -16%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+            radial-gradient(74rem 36rem at 92% -20%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    }
+}
+
+.note {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+}

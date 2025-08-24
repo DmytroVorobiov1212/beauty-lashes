@@ -1,0 +1,219 @@
+/* .section {
+    scroll-margin-top: calc(var(--header-h) + 8px);
+    background:
+        radial-gradient(540px 300px at 10% -10%, rgba(167, 139, 250, .10) 0%, rgba(167, 139, 250, 0) 60%) no-repeat,
+        radial-gradient(680px 340px at 90% -20%, rgba(124, 58, 237, .08) 0%, rgba(124, 58, 237, 0) 65%) no-repeat;
+} */
+.section {
+    position: relative;
+    scroll-margin-top: calc(var(--header-h) + 8px);
+    padding: var(--space-8) 0;
+    /* щоб було повітря */
+    background: none;
+    /* фон беремо з body */
+    isolation: isolate;
+    /* власний малий стек */
+}
+
+/* делікатне світло “під” секцією */
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    /* два ореоли + плавне затирання країв через mask */
+    background:
+        radial-gradient(42rem 20rem at 10% -12%, rgba(167, 139, 250, .12), rgba(167, 139, 250, 0) 60%) no-repeat,
+        radial-gradient(50rem 24rem at 92% -18%, rgba(124, 58, 237, .10), rgba(124, 58, 237, 0) 65%) no-repeat;
+
+    /* м’яко ховаємо світло зверху/знизу, щоб не різало секції */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+.title {
+    margin: 0 0 14px;
+    font-size: clamp(24px, 2.8vw, 32px);
+    color: #fff;
+}
+
+/* Сітка */
+.grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+/* Картка-прев’ю */
+.thumbBtn {
+    position: relative;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    border-radius: var(--radius-m);
+    overflow: hidden;
+
+    /* glass edge */
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+    transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease;
+}
+
+.thumbBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: rgba(167, 139, 250, .35);
+}
+
+/* псевдо-підсвітка краю при ховері */
+.thumbBtn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(167, 139, 250, .18), rgba(124, 58, 237, .10));
+    opacity: 0;
+    transition: opacity .18s ease;
+}
+
+.thumbBtn:hover::after {
+    opacity: 1;
+}
+
+.thumbImg {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* однакові пропорції */
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    transition: transform .25s ease;
+}
+
+.thumbBtn:hover .thumbImg {
+    transform: scale(1.04);
+}
+
+/* Лайтбокс */
+.overlay {
+    position: fixed;
+    inset: 0;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, .82);
+    backdrop-filter: saturate(160%) blur(10px);
+    animation: fadeIn .18s ease;
+    z-index: 9999;
+    /* було 100 — підняли вище всього */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.lightboxImg {
+    max-width: 95vw;
+    max-height: 88vh;
+    height: auto;
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow);
+}
+
+/* Кнопка закриття */
+.close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: var(--shadow-soft);
+    transition: transform .15s ease, background .2s ease, border-color .2s ease;
+}
+
+.close:hover {
+    transform: translateY(-1px);
+    background: rgba(255, 255, 255, .08);
+    border-color: rgba(167, 139, 250, .35);
+}
+
+.close:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        gap: 14px;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+
+    .section {
+        padding: var(--space-10) 0;
+    }
+
+    .section::before {
+        background:
+            radial-gradient(52rem 26rem at 10% -14%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+            radial-gradient(60rem 30rem at 92% -18%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    }
+}
+
+@media (min-width: 1440px) {
+    .grid {
+        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    .section {
+        padding: var(--space-12) 0;
+    }
+
+    .section::before {
+        background:
+            radial-gradient(64rem 30rem at 10% -16%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+            radial-gradient(74rem 36rem at 92% -20%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    }
+}
+
+/* рамка вікна попереднього перегляду */
+.frame {
+    position: relative;
+    width: min(95vw, 1200px);
+    /* не ширше за 1200, але адаптивно */
+    height: 88vh;
+    /* вписуємося у в'юпорт по висоті */
+    max-height: 88vh;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+/* саме зображення — заповнює рамку, але не спотворюється */
+.preview {
+    object-fit: contain;
+    /* зберігає пропорції */
+    object-position: center;
+    background: rgba(0, 0, 0, .2);
+    /* легкий фон позаду “листів” */
+}
