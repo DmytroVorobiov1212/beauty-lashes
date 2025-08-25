@@ -23,7 +23,7 @@ export default function Footer() {
               className={s.brandImg}
               priority
             />
-            <span className={s.brandText}>Dmytro DevCraft</span>
+            {/* <span className={s.brandText}>Dmytro DevCraft</span> */}
           </a>
 
           <div className={s.copy}>{t('copyright', { year })}</div>

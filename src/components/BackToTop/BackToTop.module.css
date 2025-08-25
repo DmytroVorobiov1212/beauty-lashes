@@ -1,0 +1,66 @@
+.btn {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: #fff;
+
+    backdrop-filter: saturate(160%) blur(10px);
+    box-shadow: var(--shadow-soft);
+
+    opacity: 0;
+    transform: translateY(20px) scale(.96);
+    pointer-events: none;
+
+    transition:
+        opacity .2s ease,
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+
+    z-index: 9200;
+    /* нижче за модалку (яка 9999), але вище контенту */
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, .08);
+    box-shadow: var(--shadow);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.icon {
+    font-size: 22px;
+    line-height: 1;
+}
+
+@media (min-width: 768px) {
+    .btn {
+        right: 24px;
+        bottom: 24px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .icon {
+        font-size: 24px;
+    }
+}

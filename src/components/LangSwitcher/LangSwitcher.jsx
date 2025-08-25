@@ -7,7 +7,7 @@ import s from './LangSwitcher.module.css';
 
 const COOKIE = 'MYNEXTAPP_LOCALE';
 const ALLOWED = ['en', 'uk', 'cs'];
-const DEFAULT = 'en';
+const DEFAULT = 'cs';
 
 function readCookie() {
   const pair = document.cookie
@@ -16,7 +16,6 @@ function readCookie() {
   return pair ? pair.split('=')[1] : '';
 }
 function writeCookie(value) {
-  // залишаю як було; якщо схочеш — додамо path=/; max-age; samesite=lax
   document.cookie = `${COOKIE}=${value};`;
 }
 

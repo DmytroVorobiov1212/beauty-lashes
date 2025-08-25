@@ -2,7 +2,7 @@ import { getRequestConfig } from 'next-intl/server';
 import { cookies } from 'next/headers';
 
 const ALLOWED = ['en', 'uk', 'cs'];
-const DEFAULT = 'en';
+const DEFAULT = 'cs';
 
 export default getRequestConfig(async () => {
     const store = await cookies();
