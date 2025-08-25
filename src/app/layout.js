@@ -41,6 +41,10 @@ export async function generateMetadata() {
       siteName: 'Beauty Lashes Tábor',
       locale: ogLocale
     },
+    icons: {
+      icon: '/favicon.ico',
+      apple: '/apple-touch-icon.png'
+    }
   };
 }
 
