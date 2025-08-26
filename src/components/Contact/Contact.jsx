@@ -107,6 +107,13 @@
 import { useTranslations } from 'next-intl';
 import { FiPhone, FiMail, FiInstagram } from 'react-icons/fi'; // ⬅️ нове
 import s from './Contact.module.css';
+import { useEffect, useState } from 'react';
+import {
+  readConsent,
+  onConsentChange,
+  grantMapsOnly,
+  updateConsent,
+} from '@/lib/consent';
 
 const PHONES = ['+420721460816', '+420775616298'];
 const INSTA =
@@ -121,6 +128,32 @@ const MAP_LINK = 'https://maps.app.goo.gl/fPf2RveWmkiqSLrv9?g_st=ipc';
 
 export default function Contact() {
   const t = useTranslations('Contact');
+  const c = useTranslations('Cookies');
+
+  const [mapsAllowed, setMapsAllowed] = useState(false);
+
+  useEffect(() => {
+    const c = readConsent();
+    setMapsAllowed(!!c?.maps);
+    const off = onConsentChange((next) => setMapsAllowed(!!next.maps));
+    return off;
+  }, []);
+
+  const enableMap = () => {
+    grantMapsOnly();
+    setMapsAllowed(true);
+  };
+  const openConsentPreferences = () => {
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.__openConsent__ === 'function'
+    ) {
+      window.__openConsent__();
+    } else {
+      updateConsent({ maps: true });
+      setMapsAllowed(true);
+    }
+  };
 
   return (
     <section
@@ -197,14 +230,47 @@ export default function Contact() {
               </p>
             </div>
 
-            <div className={s.mapWrap}>
+            {/* <div className={s.mapWrap}>
               <iframe
                 title="Map"
                 src={MAP_EMBED}
                 className={s.map}
                 loading="lazy"
               />
-            </div>
+            </div> */}
+            {!mapsAllowed ? (
+              <div className={s.mapWrap}>
+                <img
+                  src="/map-static.jpg"
+                  alt={c('mapPreviewAlt')}
+                  className={s.map}
+                />
+                <div className={s.mapOverlay}>
+                  <p>{c('mapConsentText')}</p>
+                  <div className={s.mapButtons}>
+                    <button className={s.mapBtn} onClick={enableMap}>
+                      {c('enableMap')}
+                    </button>
+                    <button
+                      className={s.mapBtnGhost}
+                      onClick={openConsentPreferences}
+                    >
+                      {c('settings')}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className={s.mapWrap}>
+                <iframe
+                  title="Map"
+                  src={MAP_EMBED}
+                  className={s.map}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>

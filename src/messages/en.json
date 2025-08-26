@@ -39,7 +39,28 @@
     },
     "note": "Prices in CZK."
   },
+  "Team": {
+    "title": "Our Team",
+    "subtitle": "Experienced lash stylists. Follow us on Instagram."
+  },
   "Footer": {
     "copyright": "© {year} Dmytro Vorobiov. All rights reserved."
+  },
+  "Cookies": {
+    "title": "Cookies & Privacy",
+    "desc": "We only use essential cookies for the interface language and — if you allow — we load Google Maps on the contact section.",
+    "necessary": "Essential",
+    "necessaryHint": "Interface language, basic site features.",
+    "always": "always on",
+    "maps": "Maps (Google Maps)",
+    "mapsHint": "Embedded Google Map may set its own cookies and load external content.",
+    "accept": "Accept all",
+    "reject": "Reject",
+    "settings": "Settings",
+    "save": "Save choice",
+    "cancel": "Close",
+    "enableMap": "Enable map",
+    "mapConsentText": "To view the map, please enable Maps in cookie settings.",
+    "mapPreviewAlt": "Map preview of Tábor"
   }
 }

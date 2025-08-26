@@ -209,3 +209,52 @@
             radial-gradient(74rem 36rem at 92% -20%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
     }
 }
+
+
+
+.mapWrap {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    background: rgba(255, 255, 255, .03);
+    box-shadow: var(--shadow-soft);
+}
+
+.mapOverlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(180deg, rgba(0, 0, 0, .55), rgba(0, 0, 0, .65));
+    padding: 16px;
+    text-align: center;
+}
+
+.mapButtons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+.mapBtn {
+    padding: 8px 12px;
+    border-radius: 999px;
+    color: #fff;
+    background: #2a2d33;
+    border: 1px solid rgba(255, 255, 255, .14);
+}
+
+.mapBtn:hover {
+    background: #30343a;
+}
+
+.mapBtnGhost {
+    padding: 8px 12px;
+    border-radius: 999px;
+    color: var(--muted);
+    border: 1px dashed rgba(255, 255, 255, .18);
+    background: transparent;
+}

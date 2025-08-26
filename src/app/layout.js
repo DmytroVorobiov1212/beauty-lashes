@@ -4,6 +4,7 @@ import Navbar from '@/components/NavBar/NavBar';
 import BackToTop from '@/components/BackToTop/BackToTop';
 import JsonLd from '@/components/SEO/JsonLd';
 import './globals.css';
+import CookieConsent from '@/components/CookieConsent/CookieConsent';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
 
@@ -59,6 +60,7 @@ export default async function RootLayout({ children }) {
           <Navbar />
           {children}
           <BackToTop />
+          <CookieConsent />
           <JsonLd />
         </NextIntlClientProvider>
       </body>
