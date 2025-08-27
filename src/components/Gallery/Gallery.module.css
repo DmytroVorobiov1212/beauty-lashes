@@ -91,7 +91,7 @@
     background: rgba(0, 0, 0, .82);
     backdrop-filter: saturate(160%) blur(10px);
     animation: fadeIn .18s ease;
-    z-index: 9999;
+    z-index: 99999;
 }
 
 .frame {
