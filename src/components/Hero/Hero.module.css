@@ -1,6 +1,6 @@
-.section {
+/*.section {
     position: relative;
-    overflow: clip;
+    overflow: visible;
     scroll-margin-top: calc(var(--header-h) + 8px);
 
     min-height: clamp(520px, 85vh, 880px);
@@ -13,9 +13,9 @@
             rgba(59, 47, 47, .25) 55%,
             rgba(59, 47, 47, 0) 72%),
         url('/hero/hero-bg.webp') left center / cover no-repeat;
-}
+}*/
 
-@supports (background-image: image-set(url('/hero/hero-bg.webp') 1x)) {
+/*@supports (background-image: image-set(url('/hero/hero-bg.webp') 1x)) {
     .section {
         background-image:
             linear-gradient(90deg,
@@ -26,12 +26,57 @@
             image-set(url('/hero/hero-bg.webp') 1x,
                 url('/hero/hero-bg@2x.webp') 2x);
     }
-}
+}*/
 
-.inner {
+/*.inner {
     margin-left: auto;
     max-width: 680px;
     padding: 12px 0 8px;
+}*/
+
+.section {
+  position: relative;
+  overflow: visible;                /* ⬅️ важливо */
+  scroll-margin-top: calc(var(--header-h) + 8px);
+
+  /* ФІКСОВАНА ВИСОТА */
+  height: 100svh;                   /* динамічний “safe” в’юпорт на iOS */
+  min-height: 560px;                /* запас для старих/вузьких */
+
+  padding-block: clamp(28px, 6svh, 72px);
+
+  background:
+    linear-gradient(90deg,
+      rgba(59, 47, 47, .85) 0%,
+      rgba(59, 47, 47, .55) 28%,
+      rgba(59, 47, 47, .25) 55%,
+      rgba(59, 47, 47, 0) 72%),
+    url('/hero/hero-bg.webp') left center / cover no-repeat;
+}
+
+@supports (background-image: image-set(url('/hero/hero-bg.webp') 1x)) {
+  .section {
+    background-image:
+      linear-gradient(90deg,
+        rgba(59, 47, 47, .85) 0%,
+        rgba(59, 47, 47, .55) 28%,
+        rgba(59, 47, 47, .25) 55%,
+        rgba(59, 47, 47, 0) 72%),
+      image-set(url('/hero/hero-bg.webp') 1x,
+                url('/hero/hero-bg@2x.webp') 2x);
+  }
+}
+
+.inner {
+  margin-left: auto;
+  max-width: 680px;
+  padding: 12px 0 8px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (orientation: landscape) and (max-height: 430px) {
+  .section { height: 120svh; }      /* свідомо більше за в’юпорт – просто буде легкий скрол */
 }
 
 .title {
@@ -78,7 +123,7 @@
 }
 
 @media (max-width: 767.98px) {
-    .section {
+    /*.section {
         background-position: 20% center, 20% center;
         min-height: 70vh;
     }
@@ -86,7 +131,16 @@
     .inner {
         margin-left: 0;
         max-width: 100%;
-    }
+    }*/
+  .section {
+    background-position: 20% center, 20% center;
+    /* можна залишити 100svh, але 105svh додає простору під меню */
+    height: 105svh;
+  }
+  .inner {
+    margin-left: 0;
+    max-width: 100%;
+  }
 }
 
 @media (min-width: 1440px) {
