@@ -1,4 +1,4 @@
-/*.section {
+.section {
     position: relative;
     overflow: clip;
     scroll-margin-top: calc(var(--header-h) + 8px);
@@ -13,33 +13,6 @@
             rgba(59, 47, 47, .25) 55%,
             rgba(59, 47, 47, 0) 72%),
         url('/hero/hero-bg.webp') left center / cover no-repeat;
-}*/
-
-.section {
-  position: relative;
-  /* було overflow: clip;  — прибираємо, щоб меню не обрізалось */
-  overflow: visible;
-  scroll-margin-top: calc(var(--header-h) + 8px);
-
-  /* базовий фолбек */
-  min-height: 85vh;
-  padding-block: clamp(32px, 6vh, 72px);
-
-  background:
-    linear-gradient(90deg,
-      rgba(59,47,47,.85) 0%,
-      rgba(59,47,47,.55) 28%,
-      rgba(59,47,47,.25) 55%,
-      rgba(59,47,47,0) 72%),
-    url('/hero/hero-bg.webp') left center / cover no-repeat;
-}
-
-/* краща висота на iOS/андроїд — dynamic viewport */
-@supports (height: 1svh) {
-  .section {
-    min-height: clamp(420px, 88svh, 880px);
-    padding-block: clamp(28px, 7svh, 80px);
-  }
 }
 
 @supports (background-image: image-set(url('/hero/hero-bg.webp') 1x)) {
