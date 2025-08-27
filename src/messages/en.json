@@ -25,7 +25,11 @@
     "icoLabel": "Company ID (IČO)",
     "addressLabel": "Address",
     "address": "Hradební 129/1, Tábor 1",
-    "mapOpen": "Open in Google Maps"
+    "mapOpen": "Open in Google Maps",
+    "settings": "Settings",
+    "enableMap": "Enable map",
+    "mapConsentText": "To view the map, please enable Maps in cookie settings.",
+    "mapPreviewAlt": "Map preview of Tábor"
   },
   "Prices": {
     "title": "Price list",
@@ -46,21 +50,52 @@
   "Footer": {
     "copyright": "© {year} Dmytro Vorobiov. All rights reserved."
   },
+  "Offerings": {
+    "title": "Services & Prices",
+    "showDetails": "Details",
+    "hideDetails": "Hide",
+    "note": "Prices are in CZK. Final price may vary by lash condition.",
+    "items": {
+      "classic": {
+        "name": "Classic",
+        "desc": "One extension per natural lash for a clean, natural look."
+      },
+      "2d3d": {
+        "name": "2D / 3D",
+        "desc": "Small fans for a fuller line while keeping it lightweight."
+      },
+      "wetEffect": {
+        "name": "Wet effect",
+        "desc": "Glossy, spiky styling with thin closed fans."
+      },
+      "4d5d": {
+        "name": "4D–5D",
+        "desc": "Volume fans for dramatic density and depth."
+      },
+      "volume": {
+        "name": "Volume",
+        "desc": "Custom mix of volumes tailored to your eye shape."
+      },
+      "removal": {
+        "name": "Removal",
+        "desc": "Gentle professional removal without damage."
+      }
+    }
+  },
   "Cookies": {
-    "title": "Cookies & Privacy",
-    "desc": "We only use essential cookies for the interface language and — if you allow — we load Google Maps on the contact section.",
-    "necessary": "Essential",
-    "necessaryHint": "Interface language, basic site features.",
-    "always": "always on",
-    "maps": "Maps (Google Maps)",
-    "mapsHint": "Embedded Google Map may set its own cookies and load external content.",
-    "accept": "Accept all",
-    "reject": "Reject",
-    "settings": "Settings",
-    "save": "Save choice",
-    "cancel": "Close",
-    "enableMap": "Enable map",
-    "mapConsentText": "To view the map, please enable Maps in cookie settings.",
-    "mapPreviewAlt": "Map preview of Tábor"
+    "title": "Cookies",
+    "description": "We use essential cookies to run this site. You can optionally allow maps, analytics and marketing.",
+    "configure": "Customize",
+    "deny": "Decline",
+    "acceptAll": "Accept all",
+    "settingsTitle": "Cookie settings",
+    "mapsLabel": "Maps",
+    "mapsHint": "Embedded Google Map on the contact page.",
+    "analyticsLabel": "Analytics",
+    "analyticsHint": "Traffic statistics (GA4, etc.).",
+    "marketingLabel": "Marketing",
+    "marketingHint": "Advertising/remarketing pixels.",
+    "back": "Back",
+    "save": "Save"
   }
 }

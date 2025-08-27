@@ -11,12 +11,12 @@ const PEOPLE = [
     name: 'Natalia',
     instagram:
       'https://www.instagram.com/nv_studio_tabor?igsh=eno3dHNzYnNtZGI4',
-    photo: null, // '/team/natalia.jpg'
+    photo: '/team/natalia.jpg', // null
   },
   {
     name: 'Anzhelika',
     instagram: 'https://www.instagram.com/rasy_tabor?igsh=a2JsM21hd2dhc3pm',
-    photo: null, // '/team/anzhelika.jpg'
+    photo: '/team/anzhelika.jpg', // null
   },
 ];
 
@@ -74,7 +74,7 @@ export default function Team() {
 
               <div className={s.info}>
                 <h3 className={s.name}>{name}</h3>
-                <a
+                {/* <a
                   href={instagram}
                   target="_blank"
                   rel="noreferrer"
@@ -83,6 +83,16 @@ export default function Team() {
                 >
                   <FiInstagram aria-hidden="true" />
                   <span>{handleFromUrl(instagram)}</span>
+                </a> */}
+                <a
+                  href={instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={s.ig}
+                  aria-label={`${name} — Instagram`}
+                >
+                  <FiInstagram aria-hidden="true" className={s.igIco} />
+                  <span className={s.handle}>{handleFromUrl(instagram)}</span>
                 </a>
               </div>
             </article>

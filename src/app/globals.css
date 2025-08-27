@@ -177,7 +177,7 @@ h1,
 h2,
 h3,
 h4 {
-  margin: 0 0 .6em;
+  /* margin: 0 0 .6em; */
   line-height: 1.15;
   color: #fff;
 }
@@ -196,7 +196,7 @@ h3 {
 }
 
 p {
-  margin: 0 0 1em;
+  /* margin: 0 0 1em; */
   color: var(--muted);
 }
 

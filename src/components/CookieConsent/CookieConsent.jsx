@@ -3,10 +3,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { readConsent, grantAll, rejectAll, updateConsent } from '@/lib/consent';
 import s from './CookieConsent.module.css';
+import { useTranslations } from 'next-intl';
 
 const SESSION_KEY = 'CONSENT_DISMISSED_SESSION';
 
 export default function CookieConsent() {
+  const t = useTranslations('Cookies');
+
   const [visible, setVisible] = useState(false);
   const [closing, setClosing] = useState(false);
   const [prefsOpen, setPrefsOpen] = useState(false);
@@ -112,35 +115,30 @@ export default function CookieConsent() {
         {!prefsOpen ? (
           <>
             <div className={s.handle} aria-hidden />
-            <h3 className={s.title}>Cookies</h3>
-            <p className={s.text}>
-              Використовуємо необхідні cookies для роботи сайту. За бажанням ви
-              можете дозволити карти, аналітику та маркетинг.
-            </p>
+            <h3 className={s.title}>{t('title')}</h3>
+            <p className={s.text}>{t('description')}</p>
             <div className={s.actions}>
               <button className={s.btnGhost} onClick={() => setPrefsOpen(true)}>
-                Налаштувати
+                {t('configure')}
               </button>
               <button className={s.btnSecondary} onClick={denyAll}>
-                Відхилити
+                {t('deny')}
               </button>
               <button className={s.btnPrimary} onClick={acceptAll}>
-                Прийняти все
+                {t('acceptAll')}
               </button>
             </div>
           </>
         ) : (
           <>
             <div className={s.handle} aria-hidden />
-            <h3 className={s.title}>Налаштування cookies</h3>
+            <h3 className={s.title}>{t('settingsTitle')}</h3>
 
             <div className={s.prefList}>
               <div className={s.prefRow}>
                 <div>
-                  <strong>Карти</strong>
-                  <div className={s.hint}>
-                    Вбудована Google Map у контактах.
-                  </div>
+                  <strong>{t('mapsLabel')}</strong>
+                  <div className={s.hint}>{t('mapsHint')}</div>
                 </div>
                 <label className={s.switch}>
                   <input
@@ -154,10 +152,8 @@ export default function CookieConsent() {
 
               <div className={s.prefRow}>
                 <div>
-                  <strong>Аналітика</strong>
-                  <div className={s.hint}>
-                    Статистика відвідувань (GA4 тощо).
-                  </div>
+                  <strong>{t('analyticsLabel')}</strong>
+                  <div className={s.hint}>{t('analyticsHint')}</div>
                 </div>
                 <label className={s.switch}>
                   <input
@@ -171,10 +167,8 @@ export default function CookieConsent() {
 
               <div className={s.prefRow}>
                 <div>
-                  <strong>Маркетинг</strong>
-                  <div className={s.hint}>
-                    Пікселі для реклами/ремаркетингу.
-                  </div>
+                  <strong>{t('marketingLabel')}</strong>
+                  <div className={s.hint}>{t('marketingHint')}</div>
                 </div>
                 <label className={s.switch}>
                   <input
@@ -192,13 +186,13 @@ export default function CookieConsent() {
                 className={s.btnGhost}
                 onClick={() => setPrefsOpen(false)}
               >
-                Назад
+                {t('back')}
               </button>
               <button className={s.btnSecondary} onClick={denyAll}>
-                Відхилити
+                {t('deny')}
               </button>
               <button className={s.btnPrimary} onClick={savePrefs}>
-                Зберегти
+                {t('save')}
               </button>
             </div>
           </>

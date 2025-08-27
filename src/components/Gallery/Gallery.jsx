@@ -10,7 +10,18 @@ import 'swiper/css';
 import { FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi';
 import s from './Gallery.module.css';
 
-const IMAGES = ['/gallery/2.jpg', '/gallery/3.jpg', '/gallery/4.jpg'];
+const IMAGES = [
+  '/gallery/1.jpg',
+  '/gallery/2.jpg',
+  '/gallery/3.jpg',
+  '/gallery/4.jpg',
+  '/gallery/5.jpg',
+  '/gallery/6.jpg',
+  '/gallery/7.jpg',
+  '/gallery/8.jpg',
+  '/gallery/9.jpg',
+  '/gallery/10.jpg',
+];
 
 export default function Gallery() {
   const t = useTranslations('Gallery');

@@ -25,7 +25,11 @@
     "icoLabel": "IČO",
     "addressLabel": "Adresa",
     "address": "Hradební 129/1, Tábor 1",
-    "mapOpen": "Otevřít v Mapách Google"
+    "mapOpen": "Otevřít v Mapách Google",
+    "settings": "Nastavení",
+    "enableMap": "Povolit mapu",
+    "mapConsentText": "Chcete-li zobrazit mapu, povolte prosím Mapy v nastavení cookies.",
+    "mapPreviewAlt": "Náhled mapy Tábor"
   },
   "Prices": {
     "title": "Ceník",
@@ -46,21 +50,52 @@
   "Footer": {
     "copyright": "© {year} Dmytro Vorobiov. Všechna práva vyhrazena."
   },
+  "Offerings": {
+    "title": "Služby a ceny",
+    "showDetails": "Detail",
+    "hideDetails": "Skrýt",
+    "note": "Ceny jsou v CZK. Konečná cena se může lišit podle stavu řas.",
+    "items": {
+      "classic": {
+        "name": "Klasika",
+        "desc": "Jedna umělá řasa na jednu přirozenou – čistý, přirozený vzhled."
+      },
+      "2d3d": {
+        "name": "2D / 3D",
+        "desc": "Malé vějířky pro plnější linii bez zbytečné zátěže."
+      },
+      "wetEffect": {
+        "name": "Mokrý efekt",
+        "desc": "Lesklé „spikes“ z tenkých zavřených vějířků."
+      },
+      "4d5d": {
+        "name": "4D–5D",
+        "desc": "Objemové vějířky pro výraznou hustotu a hloubku."
+      },
+      "volume": {
+        "name": "Objem (Volume)",
+        "desc": "Vlastní mix objemů podle tvaru očí."
+      },
+      "removal": {
+        "name": "Odstranění řas",
+        "desc": "Šetrné profesionální odstranění bez poškození."
+      }
+    }
+  },
   "Cookies": {
-    "title": "Cookies & soukromí",
-    "desc": "Používáme pouze nezbytné cookies pro jazyk rozhraní a – pokud povolíte – načteme Google Mapy v kontaktech.",
-    "necessary": "Nezbytné",
-    "necessaryHint": "Jazyk rozhraní, základní funkce webu.",
-    "always": "vždy aktivní",
-    "maps": "Mapy (Google Maps)",
-    "mapsHint": "Vložená mapa Google může nastavovat své cookies a načítat externí obsah.",
-    "accept": "Přijmout vše",
-    "reject": "Odmítnout",
-    "settings": "Nastavení",
-    "save": "Uložit volbu",
-    "cancel": "Zavřít",
-    "enableMap": "Povolit mapu",
-    "mapConsentText": "Chcete-li zobrazit mapu, povolte prosím Mapy v nastavení cookies.",
-    "mapPreviewAlt": "Náhled mapy Tábor"
+    "title": "Cookies",
+    "description": "Používáme nezbytné cookies pro provoz webu. Volitelně můžete povolit mapy, analytiku a marketing.",
+    "configure": "Nastavit",
+    "deny": "Odmítnout",
+    "acceptAll": "Přijmout vše",
+    "settingsTitle": "Nastavení cookies",
+    "mapsLabel": "Mapy",
+    "mapsHint": "Vložená Google mapa v kontaktech.",
+    "analyticsLabel": "Analytika",
+    "analyticsHint": "Statistiky návštěvnosti (GA4 apod.).",
+    "marketingLabel": "Marketing",
+    "marketingHint": "Reklamní/remarketingové pixely.",
+    "back": "Zpět",
+    "save": "Uložit"
   }
 }

@@ -1,0 +1,251 @@
+.section {
+    position: relative;
+    scroll-margin-top: calc(var(--header-h) + 8px);
+    padding: var(--space-8) 0;
+    isolation: isolate;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(42rem 20rem at 10% -12%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+        radial-gradient(50rem 24rem at 92% -18%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+.title {
+    margin: 0 0 14px;
+    font-size: clamp(24px, 2.8vw, 32px);
+    letter-spacing: -.01em;
+    color: #fff;
+}
+
+/* список */
+.list {
+    display: grid;
+    gap: 12px;
+}
+
+/* картка */
+.item {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+}
+
+/* стильний лівий акцент замість крапки */
+.item::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--accent-2));
+    opacity: .9;
+}
+
+/* тригер */
+/* .trigger {
+    all: unset;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 16px;
+    cursor: pointer;
+} */
+
+.trigger {
+    appearance: none;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+
+    width: 100%;
+    padding: 14px 16px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.trigger:hover {
+    background: rgba(255, 255, 255, .04);
+}
+
+.trigger:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* назва */
+/* .name {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
+.name {
+    margin: 0;
+    font-size: 16px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    /* обов'язково для grid-елемента з ellipsis */
+}
+
+/* правий блок */
+/* .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+} */
+.right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+/* ціна */
+.price {
+    font-weight: 800;
+    white-space: nowrap;
+    letter-spacing: .2px;
+    background: linear-gradient(135deg, #fff 0%, #e9e3ff 40%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+}
+
+/* чип зі стрілкою */
+.chevWrap {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+}
+
+.chev {
+    width: 18px;
+    height: 18px;
+    opacity: .95;
+    transition: transform .22s ease;
+}
+
+/* коли відкрите — стрілка вгору (виглядає як ^) */
+.item[data-state="open"] .chev {
+    transform: rotate(180deg);
+}
+
+/* контент акордеона з правильною анімацією під Radix */
+.content {
+    overflow: hidden;
+    padding: 0 16px;
+}
+
+.content[data-state="open"] {
+    animation: slideDown .22s ease forwards;
+}
+
+.content[data-state="closed"] {
+    animation: slideUp .2s ease forwards;
+}
+
+@keyframes slideDown {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+
+    to {
+        height: var(--radix-accordion-content-height);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        height: var(--radix-accordion-content-height);
+        opacity: 1;
+    }
+
+    to {
+        height: 0;
+        opacity: 0;
+    }
+}
+
+.desc {
+    color: var(--muted);
+    padding: 10px 0 16px;
+}
+
+.note {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* планшет/десктоп */
+@media (min-width:768px) {
+    .section {
+        padding: var(--space-10) 0;
+    }
+
+    .trigger {
+        padding: 16px 18px;
+    }
+
+    .chevWrap {
+        width: 30px;
+        height: 30px;
+    }
+
+    .chev {
+        width: 20px;
+        height: 20px;
+    }
+
+    .section::before {
+        background:
+            radial-gradient(52rem 26rem at 10% -14%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+            radial-gradient(60rem 30rem at 92% -18%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    }
+}
+
+@media (min-width:1440px) {
+    .section {
+        padding: var(--space-12) 0;
+    }
+
+    .section::before {
+        background:
+            radial-gradient(64rem 30rem at 10% -16%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
+            radial-gradient(74rem 36rem at 92% -20%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
+    }
+}

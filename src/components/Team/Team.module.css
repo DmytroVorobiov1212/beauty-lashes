@@ -18,8 +18,10 @@
 
 .grid {
     display: grid;
+    justify-content: center;
     gap: 14px;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    /* grid-template-columns: 1fr; */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 340px, 1fr));
 }
 
 .card {
@@ -34,6 +36,8 @@
     box-shadow: var(--shadow-soft);
     padding: 12px;
     transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease;
+
+    overflow: hidden;
 }
 
 .card:hover {
@@ -74,6 +78,9 @@
 /* текст/лінки */
 .info {
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .name {
@@ -82,7 +89,7 @@
     color: #fff;
 }
 
-.ig {
+/* .ig {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -93,6 +100,31 @@
     border: 1px solid var(--border);
     background: rgba(255, 255, 255, .04);
     transition: background .2s ease, border-color .2s ease, transform .15s ease;
+} */
+
+/* .ig:hover {
+    background: rgba(255, 255, 255, .08);
+    border-color: rgba(255, 255, 255, .18);
+    transform: translateY(-1px);
+} */
+
+.ig {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    max-width: 100%;
+    /* не ширше за колонку */
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .04);
+    color: #fff;
+    text-decoration: none;
+
+    transition: background .2s ease, border-color .2s ease, transform .15s ease;
+    overflow: hidden;
+    /* зайве обрізаємо всередині бейджа */
 }
 
 .ig:hover {
@@ -106,6 +138,33 @@
     display: block;
 }
 
+/* ФІКС: іконка стабільного розміру і не стискається */
+.igIco {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    /* не даємо стискатись */
+    display: block;
+}
+
+/* ФІКС: текст усередині бейджа не „вилазить“ */
+.handle {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /* … якщо не влазить */
+    line-height: 1.1;
+    /* на випадок ДУЖЕ довгих нікнеймів: */
+    word-break: break-word;
+}
+
+/* На всякий: не даємо всій картці „розпухати“ через внутрішній контент */
+/* .card {
+    overflow: hidden;
+} */
+
 @media (min-width: 768px) {
     .section {
         padding: var(--space-10) 0;
@@ -114,6 +173,12 @@
     .card {
         grid-template-columns: 96px 1fr;
         padding: 14px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
+        justify-content: center;
+        /* центрує самі колонки */
     }
 
     .avatarWrap {
@@ -125,5 +190,10 @@
 @media (min-width: 1440px) {
     .section {
         padding: var(--space-12) 0;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 380px));
+        justify-content: center;
     }
 }

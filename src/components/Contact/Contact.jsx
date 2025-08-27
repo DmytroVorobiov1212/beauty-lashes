@@ -128,7 +128,6 @@ const MAP_LINK = 'https://maps.app.goo.gl/fPf2RveWmkiqSLrv9?g_st=ipc';
 
 export default function Contact() {
   const t = useTranslations('Contact');
-  const c = useTranslations('Cookies');
 
   const [mapsAllowed, setMapsAllowed] = useState(false);
 
@@ -242,20 +241,20 @@ export default function Contact() {
               <div className={s.mapWrap}>
                 <img
                   src="/map-static.jpg"
-                  alt={c('mapPreviewAlt')}
+                  alt={t('mapPreviewAlt')}
                   className={s.map}
                 />
                 <div className={s.mapOverlay}>
-                  <p>{c('mapConsentText')}</p>
+                  <p>{t('mapConsentText')}</p>
                   <div className={s.mapButtons}>
                     <button className={s.mapBtn} onClick={enableMap}>
-                      {c('enableMap')}
+                      {t('enableMap')}
                     </button>
                     <button
                       className={s.mapBtnGhost}
                       onClick={openConsentPreferences}
                     >
-                      {c('settings')}
+                      {t('settings')}
                     </button>
                   </div>
                 </div>
