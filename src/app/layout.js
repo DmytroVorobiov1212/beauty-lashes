@@ -5,8 +5,22 @@ import BackToTop from '@/components/BackToTop/BackToTop';
 import JsonLd from '@/components/SEO/JsonLd';
 import './globals.css';
 import CookieConsent from '@/components/CookieConsent/CookieConsent';
+import MotionProvider from '@/components/Providers/MotionProvider';
+import { Manrope, Noto_Serif_Display } from 'next/font/google';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+
+const manrope = Manrope({
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-sans'
+});
+
+const notoSerifDisp = Noto_Serif_Display({
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-serif'
+});
 
 const META = {
   cs: {
@@ -54,15 +68,17 @@ export default async function RootLayout({ children }) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className={`${manrope.variable} ${notoSerifDisp.variable}`}>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Navbar />
-          {children}
-          <BackToTop />
-          <CookieConsent />
-          <JsonLd />
-        </NextIntlClientProvider>
+        <MotionProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <Navbar />
+            {children}
+            <BackToTop />
+            <CookieConsent />
+            <JsonLd />
+          </NextIntlClientProvider>
+        </MotionProvider>
       </body>
     </html>
   );

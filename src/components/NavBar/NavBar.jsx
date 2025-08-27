@@ -1,9 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import LangSwitcher from '../LangSwitcher/LangSwitcher'; // шлях з урахуванням твоєї структури
-import s from './NavBar.module.css';
 import Image from 'next/image';
+import LangSwitcher from '../LangSwitcher/LangSwitcher';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import s from './NavBar.module.css';
 
 export default function NavBar() {
   const tNav = useTranslations('Nav');
@@ -11,18 +13,56 @@ export default function NavBar() {
   const tGallery = useTranslations('Gallery');
   const tPrices = useTranslations('Prices');
 
+  const OBSERVE_IDS = ['hero', 'services', 'prices', 'gallery', 'contact'];
+  const [active, setActive] = useState('');
+
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: '-55% 0px -40% 0px', threshold: 0.1 },
+    );
+    OBSERVE_IDS.map((id) => document.getElementById(id))
+      .filter(Boolean)
+      .forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  const items = [
+    { id: 'services', label: tServices('title') },
+    { id: 'prices', label: tPrices('title') }, // прибери, якщо секції #prices немає
+    { id: 'gallery', label: tGallery('title') },
+    { id: 'contact', label: tNav('contact') },
+  ];
+
+  const container = {
+    hidden: { opacity: 1 },
+    show: {
+      opacity: 1,
+      transition: { delayChildren: 0.05, staggerChildren: 0.08 },
+    },
+  };
+  const link = {
+    hidden: { opacity: 0, y: 8, filter: 'blur(4px)' },
+    show: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: { duration: 0.4, ease: 'easeOut' },
+    },
+  };
+
   return (
     <header className={s.header}>
       <div className="container">
         <div className={s.row}>
-          {/* Лого */}
           <a
             href="#hero"
             className={s.brand}
             aria-label="Beauty Lashes Tábor — Home"
           >
             <Image
-              src="/brand/beautybar-logo.jpg" // ← твій шлях
+              src="/brand/beautybar-logo.jpg"
               alt="Beauty Lashes Tábor"
               width={40}
               height={40}
@@ -31,21 +71,28 @@ export default function NavBar() {
             />
           </a>
 
-          {/* Навігація */}
-          <nav className={s.links} aria-label="Primary">
-            <a href="#services">{tServices('title')}</a>
-            <a href="#prices">{tPrices('title')}</a>
-            <a href="#gallery">{tGallery('title')}</a>
-            <a href="#contact">{tNav('contact')}</a>
-          </nav>
+          <motion.nav
+            className={s.links}
+            aria-label="Primary"
+            variants={container}
+            initial="hidden"
+            animate="show"
+          >
+            {items.map(({ id, label }) => (
+              <motion.a
+                key={id}
+                href={`#${id}`}
+                aria-current={active === id ? 'true' : undefined}
+                variants={link}
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {label}
+              </motion.a>
+            ))}
+          </motion.nav>
 
-          {/* <div className={s.spacer} /> */}
-
-          {/* Перемикач мов + CTA */}
           <LangSwitcher />
-          {/* <a className={s.cta} href="tel:+420721460816">
-            +420&nbsp;721&nbsp;460&nbsp;816
-          </a> */}
         </div>
       </div>
     </header>

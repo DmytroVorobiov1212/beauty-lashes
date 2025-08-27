@@ -2,14 +2,10 @@
     position: relative;
     scroll-margin-top: calc(var(--header-h) + 8px);
     padding: var(--space-8) 0;
-    /* щоб було повітря */
     background: none;
-    /* фон беремо з body */
     isolation: isolate;
-    /* власний малий стек */
 }
 
-/* делікатне світло “під” секцією */
 .section::before {
     content: '';
     position: absolute;
@@ -17,12 +13,10 @@
     z-index: -1;
     pointer-events: none;
 
-    /* два ореоли + плавне затирання країв через mask */
     background:
         radial-gradient(42rem 20rem at 10% -12%, rgba(167, 139, 250, .12), rgba(167, 139, 250, 0) 60%) no-repeat,
         radial-gradient(50rem 24rem at 92% -18%, rgba(124, 58, 237, .10), rgba(124, 58, 237, 0) 65%) no-repeat;
 
-    /* м’яко ховаємо світло зверху/знизу, щоб не різало секції */
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
     mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
 }
@@ -34,7 +28,6 @@
     color: #fff;
 }
 
-/* скляна картка */
 .card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -43,7 +36,6 @@
     overflow: hidden;
 }
 
-/* “псевдо-таблиця” з гарною адаптивністю */
 .table {
     display: grid;
 }
@@ -67,7 +59,6 @@
     border-color: rgba(167, 139, 250, .35);
 }
 
-/* клітинки */
 .cellName {
     color: var(--text);
 }
@@ -77,7 +68,6 @@
     white-space: nowrap;
     color: #fff;
     letter-spacing: .2px;
-    /* легкий градієнтний акцент тексту ціни */
     background: linear-gradient(135deg, #fff 0%, #e9e3ff 40%, var(--accent) 100%);
     -webkit-background-clip: text;
     background-clip: text;
@@ -85,7 +75,6 @@
     text-shadow: 0 6px 18px rgba(0, 0, 0, .25);
 }
 
-/* адаптація */
 @media (min-width: 768px) {
     .row {
         padding: 16px 22px;

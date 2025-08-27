@@ -36,7 +36,6 @@ export default function Gallery() {
 
   useEffect(() => setMounted(true), []);
 
-  // ESC закриває
   useEffect(() => {
     if (activeIdx == null) return;
     const onKey = (e) => e.key === 'Escape' && setActiveIdx(null);
@@ -44,7 +43,6 @@ export default function Gallery() {
     return () => window.removeEventListener('keydown', onKey);
   }, [activeIdx]);
 
-  // Лочимо скрол сторінки
   useEffect(() => {
     if (activeIdx == null) return;
     const prev = document.body.style.overflow;
@@ -65,7 +63,6 @@ export default function Gallery() {
       aria-modal="true"
       aria-label="Image preview"
     >
-      {/* Кнопки */}
       <button
         className={s.close}
         aria-label="Close"
@@ -97,7 +94,6 @@ export default function Gallery() {
         <FiChevronRight />
       </button>
 
-      {/* Слайдер у рамці. key змушує Swiper стартувати з потрібного слайду */}
       <div className={s.frame} onClick={(e) => e.stopPropagation()}>
         <Swiper
           key={`lightbox-${activeIdx}`}
@@ -162,7 +158,6 @@ export default function Gallery() {
         </div>
       </div>
 
-      {/* Портал у body — модалка завжди над усім */}
       {mounted && active != null ? createPortal(overlay, document.body) : null}
     </section>
   );

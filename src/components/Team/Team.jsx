@@ -3,20 +3,20 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { FiInstagram } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import s from './Team.module.css';
 
-// ⚠️ Якщо маєш фото — поклади у /public/team/ і впиши шлях у photo
 const PEOPLE = [
   {
     name: 'Natalia',
     instagram:
       'https://www.instagram.com/nv_studio_tabor?igsh=eno3dHNzYnNtZGI4',
-    photo: '/team/natalia.jpg', // null
+    photo: '/team/natalia.jpg',
   },
   {
     name: 'Anzhelika',
     instagram: 'https://www.instagram.com/rasy_tabor?igsh=a2JsM21hd2dhc3pm',
-    photo: '/team/anzhelika.jpg', // null
+    photo: '/team/anzhelika.jpg',
   },
 ];
 
@@ -40,6 +40,24 @@ function handleFromUrl(url) {
   }
 }
 
+const gridVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.12, delayChildren: 0.05 },
+  },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 24, scale: 0.96, filter: 'blur(2px)' },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
 export default function Team() {
   const t = useTranslations('Team');
   return (
@@ -54,9 +72,21 @@ export default function Team() {
         </h2>
         <p className={s.subtitle}>{t('subtitle')}</p>
 
-        <div className={s.grid}>
+        <motion.div
+          className={s.grid}
+          variants={gridVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {PEOPLE.map(({ name, instagram, photo }) => (
-            <article key={name} className={s.card}>
+            <motion.article
+              key={name}
+              className={s.card}
+              variants={cardVariants}
+              whileHover={{ y: -2 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+            >
               <div className={s.avatarWrap} aria-hidden="true">
                 {photo ? (
                   <Image
@@ -74,16 +104,6 @@ export default function Team() {
 
               <div className={s.info}>
                 <h3 className={s.name}>{name}</h3>
-                {/* <a
-                  href={instagram}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={s.ig}
-                  aria-label={`${name} — Instagram`}
-                >
-                  <FiInstagram aria-hidden="true" />
-                  <span>{handleFromUrl(instagram)}</span>
-                </a> */}
                 <a
                   href={instagram}
                   target="_blank"
@@ -95,9 +115,9 @@ export default function Team() {
                   <span className={s.handle}>{handleFromUrl(instagram)}</span>
                 </a>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

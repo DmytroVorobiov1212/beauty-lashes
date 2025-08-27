@@ -1,21 +1,11 @@
-/* .section {
-    scroll-margin-top: calc(var(--header-h) + 8px);
-    background:
-        radial-gradient(540px 300px at 10% -10%, rgba(167, 139, 250, .10) 0%, rgba(167, 139, 250, 0) 60%) no-repeat,
-        radial-gradient(680px 340px at 90% -20%, rgba(124, 58, 237, .08) 0%, rgba(124, 58, 237, 0) 65%) no-repeat;
-} */
 .section {
     position: relative;
     scroll-margin-top: calc(var(--header-h) + 8px);
     padding: var(--space-8) 0;
-    /* щоб було повітря */
     background: none;
-    /* фон беремо з body */
     isolation: isolate;
-    /* власний малий стек */
 }
 
-/* делікатне світло “під” секцією */
 .section::before {
     content: '';
     position: absolute;
@@ -23,12 +13,10 @@
     z-index: -1;
     pointer-events: none;
 
-    /* два ореоли + плавне затирання країв через mask */
     background:
         radial-gradient(42rem 20rem at 10% -12%, rgba(167, 139, 250, .12), rgba(167, 139, 250, 0) 60%) no-repeat,
         radial-gradient(50rem 24rem at 92% -18%, rgba(124, 58, 237, .10), rgba(124, 58, 237, 0) 65%) no-repeat;
 
-    /* м’яко ховаємо світло зверху/знизу, щоб не різало секції */
     -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
     mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
 }
@@ -39,14 +27,12 @@
     color: #fff;
 }
 
-/* Сітка */
 .grid {
     display: grid;
     gap: 12px;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 }
 
-/* Картка-прев’ю */
 .thumbBtn {
     position: relative;
     padding: 0;
@@ -56,7 +42,6 @@
     border-radius: var(--radius-m);
     overflow: hidden;
 
-    /* glass edge */
     background: var(--card);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-soft);
@@ -69,7 +54,6 @@
     border-color: rgba(167, 139, 250, .35);
 }
 
-/* псевдо-підсвітка краю при ховері */
 .thumbBtn::after {
     content: '';
     position: absolute;
@@ -88,7 +72,6 @@
     width: 100%;
     height: auto;
     display: block;
-    /* однакові пропорції */
     aspect-ratio: 4 / 5;
     object-fit: cover;
     transition: transform .25s ease;
@@ -98,7 +81,6 @@
     transform: scale(1.04);
 }
 
-/* Лайтбокс */
 .overlay {
     position: fixed;
     inset: 0;
@@ -112,7 +94,6 @@
     z-index: 9999;
 }
 
-/* Рамка для слайдера */
 .frame {
     position: relative;
     width: min(95vw, 1200px);
@@ -124,26 +105,22 @@
     background: rgba(0, 0, 0, .2);
 }
 
-/* Swiper повинен займати всю рамку */
 .swiper {
     width: 100%;
     height: 100%;
 }
 
-/* Слайд — позиціонуємо під Image fill */
 .slide {
     position: relative;
     width: 100%;
     height: 100%;
 }
 
-/* Картинка усередині: contain, без спотворень */
 .preview {
     object-fit: contain;
     object-position: center;
 }
 
-/* Кнопка закриття */
 .close {
     position: absolute;
     top: 18px;
@@ -169,7 +146,6 @@
     background: rgba(255, 255, 255, .08);
 }
 
-/* Стрілки (react-icons всередині) */
 .arrow {
     position: absolute;
     top: 50%;
@@ -232,7 +208,6 @@
     box-shadow: var(--shadow);
 }
 
-/* Кнопка закриття */
 .close {
     position: absolute;
     top: 18px;
@@ -297,24 +272,18 @@
     }
 }
 
-/* рамка вікна попереднього перегляду */
 .frame {
     position: relative;
     width: min(95vw, 1200px);
-    /* не ширше за 1200, але адаптивно */
     height: 88vh;
-    /* вписуємося у в'юпорт по висоті */
     max-height: 88vh;
     border-radius: var(--radius-l);
     overflow: hidden;
     box-shadow: var(--shadow);
 }
 
-/* саме зображення — заповнює рамку, але не спотворюється */
 .preview {
     object-fit: contain;
-    /* зберігає пропорції */
     object-position: center;
     background: rgba(0, 0, 0, .2);
-    /* легкий фон позаду “листів” */
 }

@@ -1,6 +1,5 @@
-// src/lib/consent.js
 const COOKIE = 'MYNEXTAPP_CONSENT';
-const MAX_AGE = 60 * 60 * 24 * 180; // 180 днів
+const MAX_AGE = 60 * 60 * 24 * 180;
 
 function readCookieRaw(name = COOKIE) {
     if (typeof document === 'undefined') return '';
@@ -11,7 +10,7 @@ function readCookieRaw(name = COOKIE) {
 export function readConsent() {
     try {
         const raw = readCookieRaw();
-        if (!raw) return null; // немає вибору => показуємо банер
+        if (!raw) return null;
         const c = JSON.parse(raw);
         return {
             necessary: true,
@@ -60,7 +59,6 @@ export function onConsentChange(cb) {
     return () => window.removeEventListener('consent:change', handler);
 }
 
-// Шорткати
 export const grantAll = () => writeConsent({ maps: true, analytics: true, marketing: true });
 export const rejectAll = () => writeConsent({ maps: false, analytics: false, marketing: false });
 export const grantMapsOnly = () => updateConsent(c => ({ ...c, maps: true }));

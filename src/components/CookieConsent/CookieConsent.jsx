@@ -14,12 +14,10 @@ export default function CookieConsent() {
   const [closing, setClosing] = useState(false);
   const [prefsOpen, setPrefsOpen] = useState(false);
 
-  // тумблери
   const [maps, setMaps] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
 
-  // свайп
   const startY = useRef(0);
   const [dragY, setDragY] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -58,7 +56,7 @@ export default function CookieConsent() {
   };
 
   const acceptAll = () => {
-    grantAll(); // одразу включає карти/аналітику/маркетинг
+    grantAll();
     closeWithAnim();
   };
   const denyAll = () => {
@@ -70,7 +68,6 @@ export default function CookieConsent() {
     closeWithAnim();
   };
 
-  // свайп-жест (мобільний)
   const onTouchStart = (e) => {
     setDragging(true);
     startY.current = e.touches[0].clientY;
@@ -78,19 +75,16 @@ export default function CookieConsent() {
   const onTouchMove = (e) => {
     if (!dragging) return;
     const dy = e.touches[0].clientY - startY.current;
-    setDragY(Math.max(0, dy)); // тягнемо тільки донизу
   };
   const onTouchEnd = () => {
     if (!dragging) return;
     const threshold = 120;
     if (dragY > threshold) {
-      // закриваємо до кінця сесії (без запису згоди)
       try {
         sessionStorage.setItem(SESSION_KEY, '1');
       } catch {}
       closeWithAnim();
     } else {
-      // відкотити назад
       setDragY(0);
     }
     setDragging(false);

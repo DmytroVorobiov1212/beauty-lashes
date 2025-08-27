@@ -18,10 +18,24 @@
 
 .grid {
     display: grid;
-    justify-content: center;
     gap: 14px;
-    /* grid-template-columns: 1fr; */
-    grid-template-columns: repeat(auto-fit, minmax(260px, 340px, 1fr));
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        justify-content: center;
+        justify-items: center;
+        gap: 16px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 }
 
 .card {
@@ -36,17 +50,18 @@
     box-shadow: var(--shadow-soft);
     padding: 12px;
     transition: transform .18s ease, box-shadow .22s ease, border-color .22s ease;
-
     overflow: hidden;
+
+    width: 100%;
+    max-width: 360px;
+    will-change: transform, filter;
 }
 
 .card:hover {
-    transform: translateY(-2px);
     box-shadow: var(--shadow);
     border-color: rgba(255, 255, 255, .14);
 }
 
-/* аватар */
 .avatarWrap {
     position: relative;
     width: 88px;
@@ -75,12 +90,11 @@
     background: radial-gradient(120% 120% at 30% 20%, #2b2d33, #1a1b1f);
 }
 
-/* текст/лінки */
 .info {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .name {
@@ -89,32 +103,12 @@
     color: #fff;
 }
 
-/* .ig {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: #fff;
-    text-decoration: none;
-    padding: 6px 10px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, .04);
-    transition: background .2s ease, border-color .2s ease, transform .15s ease;
-} */
-
-/* .ig:hover {
-    background: rgba(255, 255, 255, .08);
-    border-color: rgba(255, 255, 255, .18);
-    transform: translateY(-1px);
-} */
-
 .ig {
     display: inline-flex;
     align-items: center;
     gap: 8px;
 
     max-width: 100%;
-    /* не ширше за колонку */
     padding: 6px 10px;
     border-radius: 999px;
     border: 1px solid var(--border);
@@ -124,7 +118,6 @@
 
     transition: background .2s ease, border-color .2s ease, transform .15s ease;
     overflow: hidden;
-    /* зайве обрізаємо всередині бейджа */
 }
 
 .ig:hover {
@@ -133,37 +126,22 @@
     transform: translateY(-1px);
 }
 
-.ig svg {
-    font-size: 18px;
-    display: block;
-}
-
-/* ФІКС: іконка стабільного розміру і не стискається */
 .igIco {
     width: 18px;
     height: 18px;
     flex: 0 0 18px;
-    /* не даємо стискатись */
     display: block;
 }
 
-/* ФІКС: текст усередині бейджа не „вилазить“ */
 .handle {
     min-width: 0;
     max-width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    /* … якщо не влазить */
     line-height: 1.1;
-    /* на випадок ДУЖЕ довгих нікнеймів: */
     word-break: break-word;
 }
-
-/* На всякий: не даємо всій картці „розпухати“ через внутрішній контент */
-/* .card {
-    overflow: hidden;
-} */
 
 @media (min-width: 768px) {
     .section {
@@ -173,12 +151,7 @@
     .card {
         grid-template-columns: 96px 1fr;
         padding: 14px;
-    }
-
-    .grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 340px));
-        justify-content: center;
-        /* центрує самі колонки */
+        max-width: 420px;
     }
 
     .avatarWrap {
@@ -192,8 +165,7 @@
         padding: var(--space-12) 0;
     }
 
-    .grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 380px));
-        justify-content: center;
+    .card {
+        max-width: 460px;
     }
 }

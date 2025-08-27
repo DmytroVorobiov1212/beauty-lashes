@@ -3,22 +3,18 @@
     overflow: clip;
     scroll-margin-top: calc(var(--header-h) + 8px);
 
-    /* висота блоку під героїчний кадр */
     min-height: clamp(520px, 85vh, 880px);
     padding-block: clamp(32px, 6vh, 72px);
 
-    /* фонове фото на всю ширину + легкий градієнт для читабельності тексту */
     background:
         linear-gradient(90deg,
             rgba(59, 47, 47, .85) 0%,
-            /* темніше біля обличчя зліва */
             rgba(59, 47, 47, .55) 28%,
             rgba(59, 47, 47, .25) 55%,
             rgba(59, 47, 47, 0) 72%),
         url('/hero/hero-bg.webp') left center / cover no-repeat;
 }
 
-/* Якщо є підтримка image-set — підкинемо 2x */
 @supports (background-image: image-set(url('/hero/hero-bg.webp') 1x)) {
     .section {
         background-image:
@@ -32,15 +28,13 @@
     }
 }
 
-/* контент з правого краю контейнера, аби не закривати обличчя */
 .inner {
+    margin-top: 160px;
     margin-left: auto;
-    /* штовхає блок вправо всередині .container */
     max-width: 680px;
     padding: 12px 0 8px;
 }
 
-/* заголовок із градієнтом */
 .title {
     margin: 0 0 10px;
     font-size: clamp(32px, 4.2vw, 56px);
@@ -58,7 +52,6 @@
     max-width: 60ch;
 }
 
-/* CTA-таблетка */
 .cta {
     display: inline-block;
     margin-top: 4px;
@@ -85,17 +78,14 @@
     outline-offset: 3px;
 }
 
-/* адаптація */
 @media (max-width: 767.98px) {
     .section {
-        /* трохи зрушуємо фокус кадру правіше, щоб око лишалось у видимій зоні */
         background-position: 20% center, 20% center;
         min-height: 70vh;
     }
 
     .inner {
         margin-left: 0;
-        /* на мобі — стандартний потік */
         max-width: 100%;
     }
 }
@@ -103,5 +93,9 @@
 @media (min-width: 1440px) {
     .section {
         padding-block: 80px;
+    }
+
+    .inner {
+        margin-top: 0;
     }
 }

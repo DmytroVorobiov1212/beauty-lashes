@@ -25,13 +25,11 @@
     color: #fff;
 }
 
-/* список */
 .list {
     display: grid;
     gap: 12px;
 }
 
-/* картка */
 .item {
     position: relative;
     background: var(--card);
@@ -41,7 +39,6 @@
     overflow: hidden;
 }
 
-/* стильний лівий акцент замість крапки */
 .item::before {
     content: '';
     position: absolute;
@@ -50,18 +47,6 @@
     background: linear-gradient(180deg, var(--accent), var(--accent-2));
     opacity: .9;
 }
-
-/* тригер */
-/* .trigger {
-    all: unset;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    padding: 14px 16px;
-    cursor: pointer;
-} */
 
 .trigger {
     appearance: none;
@@ -93,15 +78,6 @@
     outline-offset: 3px;
 }
 
-/* назва */
-/* .name {
-    margin: 0;
-    font-size: 16px;
-    color: #fff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-} */
 .name {
     margin: 0;
     font-size: 16px;
@@ -110,15 +86,8 @@
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
-    /* обов'язково для grid-елемента з ellipsis */
 }
 
-/* правий блок */
-/* .right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-} */
 .right {
     display: flex;
     align-items: center;
@@ -126,7 +95,6 @@
     min-width: 0;
 }
 
-/* ціна */
 .price {
     font-weight: 800;
     white-space: nowrap;
@@ -138,7 +106,6 @@
     text-shadow: 0 6px 18px rgba(0, 0, 0, .25);
 }
 
-/* чип зі стрілкою */
 .chevWrap {
     display: grid;
     place-items: center;
@@ -157,23 +124,21 @@
     transition: transform .22s ease;
 }
 
-/* коли відкрите — стрілка вгору (виглядає як ^) */
 .item[data-state="open"] .chev {
     transform: rotate(180deg);
 }
 
-/* контент акордеона з правильною анімацією під Radix */
 .content {
     overflow: hidden;
     padding: 0 16px;
 }
 
 .content[data-state="open"] {
-    animation: slideDown .22s ease forwards;
+    animation: slideDown .4s ease forwards;
 }
 
 .content[data-state="closed"] {
-    animation: slideUp .2s ease forwards;
+    animation: slideUp .4s ease forwards;
 }
 
 @keyframes slideDown {
@@ -211,7 +176,6 @@
     font-size: 14px;
 }
 
-/* планшет/десктоп */
 @media (min-width:768px) {
     .section {
         padding: var(--space-10) 0;

@@ -16,14 +16,14 @@ export default function Footer() {
             aria-label="Beauty Lashes Tábor — Home"
           >
             <Image
-              src="/brand/logo-devCraft.jpg" // ← шлях до твого лого
+              src="/brand/logo-devCraft.jpg"
               alt="Dmytro DevCraft"
               width={160}
               height={40}
               className={s.brandImg}
               priority
+              sizes="(min-width:768px) 40px, 32px"
             />
-            {/* <span className={s.brandText}>Dmytro DevCraft</span> */}
           </a>
 
           <div className={s.copy}>{t('copyright', { year })}</div>

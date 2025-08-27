@@ -23,7 +23,6 @@
     gap: 12px;
 }
 
-/* бренд DevCraft */
 .brand {
     display: inline-flex;
     align-items: center;
@@ -40,20 +39,12 @@
 }
 
 .brandImg {
-    height: auto;
+    height: 40;
     width: auto;
-    max-height: 40px;
     filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .35));
     border-radius: 8px;
 }
 
-/* .brandText {
-    font-weight: 800;
-    letter-spacing: .2px;
-    white-space: nowrap;
-} */
-
-/* копірайт */
 .copy {
     color: var(--muted);
     font-size: 14px;

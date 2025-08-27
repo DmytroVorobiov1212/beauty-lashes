@@ -40,7 +40,6 @@
     }
 }
 
-/* “нижній sheet” на мобі, центрований блок на десктопі */
 .sheet {
     width: min(100%, 720px);
     background: #111;
@@ -55,7 +54,6 @@
     animation: sheetIn .24s ease both;
 
     transition: transform .25s ease;
-    /* для відкату після свайпу */
 }
 
 .sheetTall {
@@ -95,7 +93,6 @@
     }
 }
 
-/* “хендл” зверху для візуального жесту */
 .handle {
     width: 44px;
     height: 4px;
@@ -166,7 +163,6 @@
     margin-top: 2px;
 }
 
-/* toggle switch */
 .switch {
     position: relative;
     width: 46px;
@@ -213,7 +209,6 @@
     }
 }
 
-/* зменшення руху */
 @media (prefers-reduced-motion: reduce) {
 
     .backdrop,

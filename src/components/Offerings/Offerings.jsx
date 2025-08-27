@@ -5,7 +5,6 @@ import { useTranslations, useFormatter } from 'next-intl';
 import { FiChevronDown } from 'react-icons/fi';
 import s from './Offerings.module.css';
 
-// Один список – і для назв, і для цін, і для описів
 const ITEMS = [
   { key: 'classic', price: 800 },
   { key: '2d3d', price: 800 },
@@ -33,7 +32,6 @@ export default function Offerings() {
       className={`section ${s.section}`}
       aria-labelledby="offerings-title"
     >
-      {/* щоб старий лінк #prices теж працював */}
       <span id="prices" className="visually-hidden" aria-hidden="true" />
       <div className="container">
         <h2 id="offerings-title" className={s.title}>
@@ -45,10 +43,8 @@ export default function Offerings() {
             <Accordion.Item key={key} value={key} className={s.item}>
               <Accordion.Header>
                 <Accordion.Trigger className={s.trigger}>
-                  {/* Назва */}
                   <h3 className={s.name}>{t(`items.${key}.name`)}</h3>
 
-                  {/* Правий блок: ціна + стрілка */}
                   <div className={s.right}>
                     <div className={s.price}>{fmt(price)}</div>
                     <div className={s.chevWrap} aria-hidden>

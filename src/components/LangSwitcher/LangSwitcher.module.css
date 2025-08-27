@@ -1,4 +1,3 @@
-/* Капсульний glass-перемикач */
 .wrap {
     display: inline-flex;
     align-items: center;
@@ -11,7 +10,6 @@
     box-shadow: var(--shadow-soft);
 }
 
-/* Кнопки */
 .btn {
     appearance: none;
     border: 0;
@@ -33,16 +31,13 @@
     outline-offset: 2px;
 }
 
-/* Активна – градієнт, білий текст, мʼяка тінь */
 .active {
     color: #fff;
     background: linear-gradient(135deg, var(--accent-2), var(--accent));
     box-shadow: var(--shadow);
-    /* прибираємо артефакти від hover */
     border-color: transparent;
 }
 
-/* Трохи щільніше на планшеті/десктопі */
 @media (min-width: 768px) {
     .btn {
         padding: 8px 14px;

@@ -17,7 +17,7 @@ export default function BackToTop({ threshold = 400 }) {
         ticking = true;
       }
     };
-    onScroll(); // ініціалізуємо стан при завантаженні
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, [threshold]);

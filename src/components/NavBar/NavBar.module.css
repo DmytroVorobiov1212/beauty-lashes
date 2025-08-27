@@ -1,11 +1,8 @@
-/* src/components/NavBar/NavBar.module.css */
-
 .header {
     position: sticky;
     top: 0;
     z-index: 80;
 
-    /* glass */
     background: var(--card);
     backdrop-filter: saturate(160%) blur(10px);
     border-bottom: 1px solid var(--border);
@@ -20,7 +17,7 @@
     gap: 16px;
 }
 
-/* ── Logo ─────────────────────────────────────────────── */
+/* Logo */
 .brand {
     display: inline-flex;
     align-items: center;
@@ -37,18 +34,16 @@
 }
 
 .brandImg {
-    width: 40px;
-    /* під контролем CSS */
-    height: 40px;
-    border-radius: 8px;
-    /* якщо хочеш коло — постав 50% */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     object-fit: cover;
     border: 1px solid var(--border);
     filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .35));
 }
 
 
-/* ── Links ────────────────────────────────────────────── */
+/* Links */
 .links {
     display: none;
     gap: 22px;
@@ -66,7 +61,6 @@
 
 .links a:hover {
     color: #fff;
-    /* background: rgba(167, 139, 250, .12); */
     background: var(--accent-a12);
 }
 
@@ -89,17 +83,23 @@
     transform: scaleX(1);
 }
 
+/* (scroll-spy) */
+.links a[aria-current="true"] {
+    color: #fff;
+    background: rgba(255, 255, 255, .08);
+}
+
+.links a[aria-current="true"]::after {
+    transform: scaleX(1);
+}
+
 @media (min-width: 768px) {
     .links {
         display: inline-flex;
     }
 }
 
-/* .spacer {
-    flex: 1;
-} */
-
-/* ── CTA phone ───────────────────────────────────────── */
+/* CTA phone */
 .cta {
     display: none;
     padding: 10px 14px;

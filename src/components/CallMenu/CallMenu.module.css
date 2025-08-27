@@ -42,6 +42,8 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-l);
     box-shadow: var(--shadow);
+    transform-origin: top right;
+    will-change: transform, opacity, filter;
     z-index: 3000;
 }
 
