@@ -29,7 +29,6 @@
 }
 
 .inner {
-    margin-top: 100px;
     margin-left: auto;
     max-width: 680px;
     padding: 12px 0 8px;
@@ -93,9 +92,5 @@
 @media (min-width: 1440px) {
     .section {
         padding-block: 80px;
-    }
-
-    .inner {
-        margin-top: 0;
     }
 }
