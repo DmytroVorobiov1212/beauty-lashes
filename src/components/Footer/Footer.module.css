@@ -39,11 +39,14 @@
 }
 
 .brandImg {
-    height: 40;
-    width: auto;
+    display: block;
+    width: 150px;
+    height: 40px;
     filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .35));
     border-radius: 8px;
 }
+
+
 
 .copy {
     color: var(--muted);

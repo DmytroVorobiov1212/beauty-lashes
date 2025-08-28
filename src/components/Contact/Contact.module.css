@@ -158,6 +158,7 @@
 }
 
 .mapWrap {
+    position: relative;
     border: 1px solid var(--border);
     border-radius: var(--radius-m);
     overflow: hidden;
@@ -170,6 +171,9 @@
     width: 100%;
     height: 320px;
     border: 0;
+
+    object-fit: cover;
+    object-position: center;
 }
 
 @media (min-width: 768px) {
@@ -194,17 +198,6 @@
             radial-gradient(64rem 30rem at 10% -16%, rgba(167, 139, 250, .12), transparent 60%) no-repeat,
             radial-gradient(74rem 36rem at 92% -20%, rgba(124, 58, 237, .10), transparent 65%) no-repeat;
     }
-}
-
-
-
-.mapWrap {
-    position: relative;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-m);
-    overflow: hidden;
-    background: rgba(255, 255, 255, .03);
-    box-shadow: var(--shadow-soft);
 }
 
 .mapOverlay {

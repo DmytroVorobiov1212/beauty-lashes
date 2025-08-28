@@ -11,12 +11,12 @@ const PEOPLE = [
     name: 'Natalia',
     instagram:
       'https://www.instagram.com/nv_studio_tabor?igsh=eno3dHNzYnNtZGI4',
-    photo: '/team/natalia.jpg',
+    photo: '/team/natalia.webp',
   },
   {
     name: 'Anzhelika',
     instagram: 'https://www.instagram.com/rasy_tabor?igsh=a2JsM21hd2dhc3pm',
-    photo: '/team/anzhelika.jpg',
+    photo: '/team/anzhelika.webp',
   },
 ];
 
@@ -91,7 +91,7 @@ export default function Team() {
                 {photo ? (
                   <Image
                     src={photo}
-                    alt=""
+                    alt={name}
                     fill
                     sizes="160px"
                     className={s.avatarImg}

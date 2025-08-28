@@ -16,13 +16,13 @@ export default function Footer() {
             aria-label="Beauty Lashes Tábor — Home"
           >
             <Image
-              src="/brand/logo-devCraft.jpg"
+              src="/brand/logo-devCraft.webp"
               alt="Dmytro DevCraft"
-              width={160}
+              width={150}
               height={40}
               className={s.brandImg}
               priority
-              sizes="(min-width:768px) 40px, 32px"
+              sizes="160px"
             />
           </a>
 

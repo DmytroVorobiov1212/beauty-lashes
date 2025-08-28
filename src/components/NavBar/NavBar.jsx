@@ -30,7 +30,7 @@ export default function NavBar() {
 
   const items = [
     { id: 'services', label: tServices('title') },
-    { id: 'prices', label: tPrices('title') }, // прибери, якщо секції #prices немає
+    { id: 'prices', label: tPrices('title') },
     { id: 'gallery', label: tGallery('title') },
     { id: 'contact', label: tNav('contact') },
   ];
@@ -62,7 +62,7 @@ export default function NavBar() {
             aria-label="Beauty Lashes Tábor — Home"
           >
             <Image
-              src="/brand/beautybar-logo.jpg"
+              src="/brand/beautybar-logo.webp"
               alt="Beauty Lashes Tábor"
               width={40}
               height={40}

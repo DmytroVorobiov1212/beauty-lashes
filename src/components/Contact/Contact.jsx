@@ -126,11 +126,24 @@ export default function Contact() {
 
             {!mapsAllowed ? (
               <div className={s.mapWrap}>
-                <img
-                  src="/map-static.jpg"
-                  alt={t('mapPreviewAlt')}
-                  className={s.map}
-                />
+                <picture>
+                  <source
+                    media="(min-width: 1440px)"
+                    srcSet="/map/map-static420.webp 1x, /map/map-static840.webp 2x"
+                  />
+                  <source
+                    media="(min-width: 768px)"
+                    srcSet="/map/map-static360.webp 1x, /map/map-static720.webp 2x"
+                  />
+                  <img
+                    src="/map/map-static320.webp"
+                    srcSet="/map/map-static640.webp 2x"
+                    alt={t('mapPreviewAlt')}
+                    className={s.map}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
                 <div className={s.mapOverlay}>
                   <p>{t('mapConsentText')}</p>
                   <div className={s.mapButtons}>
