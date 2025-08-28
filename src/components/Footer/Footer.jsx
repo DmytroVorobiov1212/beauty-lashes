@@ -18,8 +18,8 @@ export default function Footer() {
             <Image
               src="/brand/logo-devCraft.webp"
               alt="Dmytro DevCraft"
-              width={150}
-              height={40}
+              width={160}
+              height={48}
               className={s.brandImg}
               priority
               sizes="160px"

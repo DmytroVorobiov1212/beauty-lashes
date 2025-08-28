@@ -40,8 +40,8 @@
 
 .brandImg {
     display: block;
-    width: 150px;
-    height: 40px;
+    width: 160px;
+    height: 48px;
     filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .35));
     border-radius: 8px;
 }
