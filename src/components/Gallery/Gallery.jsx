@@ -116,7 +116,8 @@ export default function Gallery() {
                   alt={`Preview ${i + 1}`}
                   fill
                   className={s.preview}
-                  sizes="95vw"
+                  // sizes="95vw"
+                  sizes="(max-width: 768px) 95vw, (max-width: 1280px) 85vw, 1200px"
                   priority={i === (activeIdx ?? 0)}
                 />
               </div>
@@ -152,6 +153,7 @@ export default function Gallery() {
                 height={500}
                 className={s.thumbImg}
                 priority={i === 0}
+                sizes="(max-width: 600px) 45vw, (max-width: 1024px) 30vw, 400px"
               />
             </button>
           ))}

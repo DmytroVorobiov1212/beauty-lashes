@@ -21,7 +21,7 @@ export default function Footer() {
               width={160}
               height={48}
               className={s.brandImg}
-              priority
+              // priority
               sizes="160px"
               loading="lazy"
               fetchPriority="low"
