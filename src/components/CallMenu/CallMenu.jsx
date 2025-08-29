@@ -8,8 +8,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 export default function CallMenu({
   label = 'Call',
   phones = [
-    { label: 'Natalia', number: '+420721460816' },
-    { label: 'Anzhelika', number: '+420000000000' },
+    { label: 'Natalia', number: '+420775616298' },
+    { label: 'Anzhelika', number: '+420721460816' },
   ],
   className,
 }) {

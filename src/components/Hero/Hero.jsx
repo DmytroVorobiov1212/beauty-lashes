@@ -47,8 +47,8 @@ export default function Hero() {
               label={t('cta')}
               className={s.cta}
               phones={[
-                { label: 'Natalia', number: '+420721460816' },
-                { label: 'Anzhelika', number: '+420775616298' },
+                { label: 'Natalia', number: '+420775616298' },
+                { label: 'Anzhelika', number: '+420721460816' },
               ]}
             />
           </motion.div>

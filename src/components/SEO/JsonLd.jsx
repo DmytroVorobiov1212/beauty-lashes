@@ -15,12 +15,24 @@ export default function JsonLd() {
       'https://www.instagram.com/beauty.bar.tabor',
       'https://maps.app.goo.gl/fPf2RveWmkiqSLrv9',
     ],
+    image: [`${site}/og.jpg`],
     address: {
       '@type': 'PostalAddress',
+      streetAddress: '— Hradební 129/1',
+      postalCode: '— 390 01',
       addressLocality: 'Tábor',
       addressRegion: 'Jihočeský kraj',
       addressCountry: 'CZ',
     },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 49.41248661648474,
+      longitude: 14.657767926600082,
+    },
+    hasMap:
+      'https://www.google.com/maps/?q=49.41248661648474,14.657767926600082',
+    logo: `${site}/brand/beautybar-logo.webp`,
+    image: [`${site}/hero/hero-desc.webp`],
     priceRange: '$$',
   };
 

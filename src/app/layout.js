@@ -40,6 +40,12 @@ const META = {
   }
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#0e0f12'
+};
+
 export async function generateMetadata() {
   const locale = await getLocale();                 // 'cs' | 'uk' | 'en'
   const { title, desc, ogLocale } = META[locale] ?? META.cs;
@@ -52,14 +58,30 @@ export async function generateMetadata() {
     openGraph: {
       type: 'website',
       url: SITE_URL,
-      title, description: desc,
-      siteName: 'Beauty Lashes Tábor',
-      locale: ogLocale
+      title,
+      description: desc,
+      siteName: 'Beauty Bar Lashes Tábor',
+      locale: ogLocale,
+      images: ['/og.jpg']
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@',
+      title,
+      description: desc,
+      images: ['/og.jpg']
     },
     icons: {
-      icon: '/favicon.ico',
-      apple: '/apple-touch-icon.png'
-    }
+      // icon: '/favicon.ico',
+      // apple: '/apple-touch-icon.png'
+      icon: [
+        { url: '/favicon.ico', type: 'image/x-icon', rel: 'icon' },
+        { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/icon-192.png', sizes: '192x192', type: 'image/png' }
+      ],
+      apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }]
+    },
+    manifest: '/manifest.webmanifest'
   };
 }
 
