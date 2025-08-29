@@ -129,19 +129,19 @@ export default function Contact() {
                 <picture>
                   <source
                     media="(min-width: 1440px)"
-                    srcSet="/map/map-static420.webp 420w, /map/map-static840.webp 840w"
+                    srcSet="/map/map-static420.webp 420w"
                     sizes="840px"
                     type="image/webp"
                   />
                   <source
                     media="(min-width: 768px)"
-                    srcSet="/map/map-static360.webp 360w, /map/map-static720.webp 720w"
+                    srcSet="/map/map-static360.webp 360w"
                     sizes="720px"
                     type="image/webp"
                   />
                   <img
                     src="/map/map-static320.webp"
-                    srcSet="/map/map-static320.webp 320w,/map/map-static640.webp 640w"
+                    srcSet="/map/map-static320.webp 320w"
                     sizes="95vw"
                     alt={t('mapPreviewAlt')}
                     className={s.map}
