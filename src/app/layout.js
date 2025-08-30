@@ -72,8 +72,6 @@ export async function generateMetadata() {
       images: ['/og.jpg']
     },
     icons: {
-      // icon: '/favicon.ico',
-      // apple: '/apple-touch-icon.png'
       icon: [
         { url: '/favicon.ico', type: 'image/x-icon', rel: 'icon' },
         { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },

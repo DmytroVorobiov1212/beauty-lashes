@@ -18,8 +18,8 @@ export default function JsonLd() {
     image: [`${site}/og.jpg`],
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '— Hradební 129/1',
-      postalCode: '— 390 01',
+      streetAddress: 'Hradební 129/1',
+      postalCode: '390 01',
       addressLocality: 'Tábor',
       addressRegion: 'Jihočeský kraj',
       addressCountry: 'CZ',
