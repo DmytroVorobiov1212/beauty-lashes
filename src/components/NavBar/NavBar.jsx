@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import s from './NavBar.module.css';
 
 export default function NavBar() {
@@ -71,7 +71,7 @@ export default function NavBar() {
             />
           </a>
 
-          <motion.nav
+          <m.nav
             className={s.links}
             aria-label="Primary"
             variants={container}
@@ -79,7 +79,7 @@ export default function NavBar() {
             animate="show"
           >
             {items.map(({ id, label }) => (
-              <motion.a
+              <m.a
                 key={id}
                 href={`#${id}`}
                 aria-current={active === id ? 'true' : undefined}
@@ -88,9 +88,9 @@ export default function NavBar() {
                 whileTap={{ scale: 0.98 }}
               >
                 {label}
-              </motion.a>
+              </m.a>
             ))}
-          </motion.nav>
+          </m.nav>
 
           <LangSwitcher />
         </div>

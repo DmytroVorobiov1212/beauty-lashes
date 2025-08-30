@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import s from './Hero.module.css';
 import CallMenu from '../CallMenu/CallMenu';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const container = {
   hidden: { opacity: 0, y: 16 },
@@ -29,20 +29,20 @@ export default function Hero() {
   return (
     <section id="hero" className={s.section}>
       <div className="container">
-        <motion.div
+        <m.div
           className={s.inner}
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.35 }}
         >
-          <motion.h1 className={s.title} variants={item}>
+          <m.h1 className={s.title} variants={item}>
             {t('title')}
-          </motion.h1>
-          <motion.p className={s.subtitle} variants={item}>
+          </m.h1>
+          <m.p className={s.subtitle} variants={item}>
             {t('subtitle')}
-          </motion.p>
-          <motion.div variants={item}>
+          </m.p>
+          <m.div variants={item}>
             <CallMenu
               label={t('cta')}
               className={s.cta}
@@ -51,8 +51,8 @@ export default function Hero() {
                 { label: 'Anzhelika', number: '+420721460816' },
               ]}
             />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   );

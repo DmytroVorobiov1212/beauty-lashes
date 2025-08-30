@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { FiInstagram } from 'react-icons/fi';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import s from './Team.module.css';
 
 const PEOPLE = [
@@ -72,7 +72,7 @@ export default function Team() {
         </h2>
         <p className={s.subtitle}>{t('subtitle')}</p>
 
-        <motion.div
+        <m.div
           className={s.grid}
           variants={gridVariants}
           initial="hidden"
@@ -80,7 +80,7 @@ export default function Team() {
           viewport={{ once: true, amount: 0.2 }}
         >
           {PEOPLE.map(({ name, instagram, photo }) => (
-            <motion.article
+            <m.article
               key={name}
               className={s.card}
               variants={cardVariants}
@@ -115,9 +115,9 @@ export default function Team() {
                   <span className={s.handle}>{handleFromUrl(instagram)}</span>
                 </a>
               </div>
-            </motion.article>
+            </m.article>
           ))}
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );
