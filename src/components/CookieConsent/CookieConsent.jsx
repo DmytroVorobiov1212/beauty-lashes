@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
+
 import { readConsent, grantAll, rejectAll, updateConsent } from '@/lib/consent';
 import s from './CookieConsent.module.css';
-import { useTranslations } from 'next-intl';
 
 const SESSION_KEY = 'CONSENT_DISMISSED_SESSION';
 
@@ -20,25 +21,30 @@ export default function CookieConsent() {
 
   const startY = useRef(0);
   const dragYRef = useRef(0);
+  const dialogRef = useRef(null);
+  const previousFocusRef = useRef(null);
+
   const [dragY, setDragY] = useState(0);
   const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
-    const c = readConsent();
+    const consent = readConsent();
     const dismissed =
       typeof window !== 'undefined' &&
       sessionStorage.getItem(SESSION_KEY) === '1';
 
-    if (!c && !dismissed) {
+    if (!consent && !dismissed) {
+      previousFocusRef.current = document.activeElement;
       setVisible(true);
-    } else if (c) {
-      setMaps(!!c.maps);
-      setAnalytics(!!c.analytics);
-      setMarketing(!!c.marketing);
+    } else if (consent) {
+      setMaps(!!consent.maps);
+      setAnalytics(!!consent.analytics);
+      setMarketing(!!consent.marketing);
     }
 
     if (typeof window !== 'undefined') {
       window.__openConsent__ = () => {
+        previousFocusRef.current = document.activeElement;
         setVisible(true);
         setPrefsOpen(true);
       };
@@ -51,19 +57,35 @@ export default function CookieConsent() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!visible) return;
+
+    requestAnimationFrame(() => {
+      dialogRef.current
+        ?.querySelector('button, input, [href], [tabindex]:not([tabindex="-1"])')
+        ?.focus();
+    });
+  }, [visible, prefsOpen]);
+
   const resetDrag = () => {
     dragYRef.current = 0;
     setDragY(0);
     setDragging(false);
   };
 
-  const closeWithAnim = (cb) => {
+  const restoreFocus = () => {
+    requestAnimationFrame(() => previousFocusRef.current?.focus?.());
+  };
+
+  const closeWithAnim = (callback) => {
     setClosing(true);
+
     window.setTimeout(() => {
       setClosing(false);
       setVisible(false);
       resetDrag();
-      cb?.();
+      callback?.();
+      restoreFocus();
     }, 240);
   };
 
@@ -82,17 +104,25 @@ export default function CookieConsent() {
     closeWithAnim();
   };
 
-  const onTouchStart = (e) => {
-    startY.current = e.touches[0].clientY;
+  const dismissForSession = () => {
+    try {
+      sessionStorage.setItem(SESSION_KEY, '1');
+    } catch {}
+
+    closeWithAnim();
+  };
+
+  const onTouchStart = (event) => {
+    startY.current = event.touches[0].clientY;
     dragYRef.current = 0;
     setDragY(0);
     setDragging(true);
   };
 
-  const onTouchMove = (e) => {
+  const onTouchMove = (event) => {
     if (!dragging) return;
 
-    const dy = Math.max(0, e.touches[0].clientY - startY.current);
+    const dy = Math.max(0, event.touches[0].clientY - startY.current);
     dragYRef.current = dy;
     setDragY(dy);
   };
@@ -100,31 +130,55 @@ export default function CookieConsent() {
   const onTouchEnd = () => {
     if (!dragging) return;
 
-    const threshold = 120;
-    if (dragYRef.current > threshold) {
-      try {
-        sessionStorage.setItem(SESSION_KEY, '1');
-      } catch {}
-
-      closeWithAnim();
+    if (dragYRef.current > 120) {
+      dismissForSession();
       return;
     }
 
     resetDrag();
   };
 
+  const onDialogKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      dismissForSession();
+      return;
+    }
+
+    if (event.key !== 'Tab' || !dialogRef.current) return;
+
+    const focusable = Array.from(
+      dialogRef.current.querySelectorAll(
+        'button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((element) => element.offsetParent !== null);
+
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
   if (!visible) return null;
 
   return (
-    <div
-      className={`${s.backdrop} ${closing ? s.fadeOut : ''}`}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Cookie consent"
-    >
+    <div className={`${s.backdrop} ${closing ? s.fadeOut : ''}`}>
       <div
+        ref={dialogRef}
         className={`${s.sheet} ${prefsOpen ? s.sheetTall : ''} ${dragging ? s.dragging : ''} ${closing ? s.closing : ''}`}
         style={{ transform: `translateY(${dragY}px)` }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cookie-consent-title"
+        onKeyDown={onDialogKeyDown}
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
@@ -132,16 +186,22 @@ export default function CookieConsent() {
         {!prefsOpen ? (
           <>
             <div className={s.handle} aria-hidden />
-            <h3 className={s.title}>{t('title')}</h3>
+            <h3 id="cookie-consent-title" className={s.title}>
+              {t('title')}
+            </h3>
             <p className={s.text}>{t('description')}</p>
             <div className={s.actions}>
-              <button className={s.btnGhost} onClick={() => setPrefsOpen(true)}>
+              <button
+                type="button"
+                className={s.btnGhost}
+                onClick={() => setPrefsOpen(true)}
+              >
                 {t('configure')}
               </button>
-              <button className={s.btnSecondary} onClick={denyAll}>
+              <button type="button" className={s.btnSecondary} onClick={denyAll}>
                 {t('deny')}
               </button>
-              <button className={s.btnPrimary} onClick={acceptAll}>
+              <button type="button" className={s.btnPrimary} onClick={acceptAll}>
                 {t('acceptAll')}
               </button>
             </div>
@@ -149,7 +209,9 @@ export default function CookieConsent() {
         ) : (
           <>
             <div className={s.handle} aria-hidden />
-            <h3 className={s.title}>{t('settingsTitle')}</h3>
+            <h3 id="cookie-consent-title" className={s.title}>
+              {t('settingsTitle')}
+            </h3>
 
             <div className={s.prefList}>
               <div className={s.prefRow}>
@@ -161,9 +223,10 @@ export default function CookieConsent() {
                   <input
                     type="checkbox"
                     checked={maps}
-                    onChange={(e) => setMaps(e.target.checked)}
+                    aria-label={t('mapsLabel')}
+                    onChange={(event) => setMaps(event.target.checked)}
                   />
-                  <span></span>
+                  <span aria-hidden="true" />
                 </label>
               </div>
 
@@ -176,9 +239,10 @@ export default function CookieConsent() {
                   <input
                     type="checkbox"
                     checked={analytics}
-                    onChange={(e) => setAnalytics(e.target.checked)}
+                    aria-label={t('analyticsLabel')}
+                    onChange={(event) => setAnalytics(event.target.checked)}
                   />
-                  <span></span>
+                  <span aria-hidden="true" />
                 </label>
               </div>
 
@@ -191,24 +255,26 @@ export default function CookieConsent() {
                   <input
                     type="checkbox"
                     checked={marketing}
-                    onChange={(e) => setMarketing(e.target.checked)}
+                    aria-label={t('marketingLabel')}
+                    onChange={(event) => setMarketing(event.target.checked)}
                   />
-                  <span></span>
+                  <span aria-hidden="true" />
                 </label>
               </div>
             </div>
 
             <div className={s.actions}>
               <button
+                type="button"
                 className={s.btnGhost}
                 onClick={() => setPrefsOpen(false)}
               >
                 {t('back')}
               </button>
-              <button className={s.btnSecondary} onClick={denyAll}>
+              <button type="button" className={s.btnSecondary} onClick={denyAll}>
                 {t('deny')}
               </button>
-              <button className={s.btnPrimary} onClick={savePrefs}>
+              <button type="button" className={s.btnPrimary} onClick={savePrefs}>
                 {t('save')}
               </button>
             </div>
