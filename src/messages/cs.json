@@ -1,11 +1,22 @@
 {
   "Nav": {
-    "contact": "Kontakty"
+    "contact": "Kontakty",
+    "services": "Služby a ceny",
+    "gallery": "Naše práce",
+    "team": "Náš tým",
+    "homeAria": "Beauty Bar Lashes Tábor — domů",
+    "primaryAria": "Hlavní navigace",
+    "openMenu": "Otevřít menu",
+    "closeMenu": "Zavřít menu"
   },
   "Hero": {
     "title": "Dokonalé řasy v Táboře",
-    "subtitle": "Klasika, 2D/3D a mokrý efekt — bezpečně, pohodlně, dlouhá výdrž.",
-    "cta": "Zavolat"
+    "subtitle": "Klasika, 2D/3D, mokrý efekt i objem — precizně, šetrně a s důrazem na pohodlí.",
+    "cta": "Zavolat",
+    "eyebrow": "Beauty Bar Lashes • Tábor",
+    "proofAria": "Informace o salonu",
+    "proofLocation": "Centrum Tábora",
+    "proofTeam": "2 zkušené lash stylistky"
   },
   "Services": {
     "title": "Služby",
@@ -14,7 +25,13 @@
     "item3": "Mokrý efekt"
   },
   "Gallery": {
-    "title": "Naše práce"
+    "title": "Naše práce",
+    "previewDialog": "Náhled fotografie",
+    "openPreview": "Otevřít fotografii {number}",
+    "imageAlt": "Ukázka prodlužování řas {number}",
+    "close": "Zavřít náhled",
+    "previous": "Předchozí fotografie",
+    "next": "Další fotografie"
   },
   "Contact": {
     "title": "Kontakty",
@@ -97,5 +114,12 @@
     "marketingHint": "Reklamní/remarketingové pixely.",
     "back": "Zpět",
     "save": "Uložit"
+  },
+  "Booking": {
+    "cta": "Objednat se",
+    "chooseMaster": "Vyberte stylistku",
+    "call": "Zavolat",
+    "mobileTitle": "Chcete termín?",
+    "mobileHint": "Vyberte stylistku a kontakt"
   }
 }
