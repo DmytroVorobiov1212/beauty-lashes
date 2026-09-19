@@ -189,22 +189,18 @@ export default function Gallery() {
             <button
               type="button"
               key={src}
-              className={`${s.thumbBtn} ${index === 0 ? s.featured : ''}`}
+              className={s.thumbBtn}
               onClick={() => open(index)}
               aria-label={t('openPreview', { number: index + 1 })}
             >
               <Image
                 src={src}
                 alt={t('imageAlt', { number: index + 1 })}
-                width={index === 0 ? 900 : 400}
-                height={index === 0 ? 720 : 500}
+                width={400}
+                height={500}
                 className={s.thumbImg}
                 priority={index < 2}
-                sizes={
-                  index === 0
-                    ? '(max-width: 767px) 100vw, 70vw'
-                    : '(max-width: 600px) 45vw, (max-width: 1024px) 30vw, 240px'
-                }
+                sizes="(max-width: 959px) 45vw, 20vw"
               />
             </button>
           ))}
