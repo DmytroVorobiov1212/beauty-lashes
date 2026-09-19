@@ -1,1 +1,1 @@
-Upgrade framework/runtime dependencies to the current secure production baseline.
+Retry framework/runtime upgrade after the Next.js 16 ESLint migration.
