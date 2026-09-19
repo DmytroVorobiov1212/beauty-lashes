@@ -1,17 +1,31 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { useTranslations } from 'next-intl';
 
-import { readConsent, grantAll, rejectAll, updateConsent } from '@/lib/consent';
-import s from './CookieConsent.module.css';
+import {
+  dismissConsentForSession,
+  getConsentBannerServerSnapshot,
+  getConsentBannerSnapshot,
+  grantAll,
+  readConsent,
+  rejectAll,
+  subscribeConsentStore,
+  updateConsent,
+} from '@/lib/consent';
 
-const SESSION_KEY = 'CONSENT_DISMISSED_SESSION';
+import s from './CookieConsent.module.css';
 
 export default function CookieConsent() {
   const t = useTranslations('Cookies');
 
-  const [visible, setVisible] = useState(false);
+  const shouldShowInitial = useSyncExternalStore(
+    subscribeConsentStore,
+    getConsentBannerSnapshot,
+    getConsentBannerServerSnapshot,
+  );
+
+  const [manualOpen, setManualOpen] = useState(false);
   const [closing, setClosing] = useState(false);
   const [prefsOpen, setPrefsOpen] = useState(false);
 
@@ -27,38 +41,31 @@ export default function CookieConsent() {
   const [dragY, setDragY] = useState(0);
   const [dragging, setDragging] = useState(false);
 
+  const visible = shouldShowInitial || manualOpen || closing;
+
   useEffect(() => {
-    const consent = readConsent();
-    const dismissed =
-      typeof window !== 'undefined' &&
-      sessionStorage.getItem(SESSION_KEY) === '1';
-
-    if (!consent && !dismissed) {
+    window.__openConsent__ = () => {
       previousFocusRef.current = document.activeElement;
-      setVisible(true);
-    } else if (consent) {
-      setMaps(!!consent.maps);
-      setAnalytics(!!consent.analytics);
-      setMarketing(!!consent.marketing);
-    }
 
-    if (typeof window !== 'undefined') {
-      window.__openConsent__ = () => {
-        previousFocusRef.current = document.activeElement;
-        setVisible(true);
-        setPrefsOpen(true);
-      };
-    }
+      const consent = readConsent();
+      setMaps(!!consent?.maps);
+      setAnalytics(!!consent?.analytics);
+      setMarketing(!!consent?.marketing);
+      setPrefsOpen(true);
+      setManualOpen(true);
+    };
 
     return () => {
-      if (typeof window !== 'undefined') {
-        delete window.__openConsent__;
-      }
+      delete window.__openConsent__;
     };
   }, []);
 
   useEffect(() => {
     if (!visible) return;
+
+    if (!previousFocusRef.current) {
+      previousFocusRef.current = document.activeElement;
+    }
 
     requestAnimationFrame(() => {
       dialogRef.current
@@ -74,42 +81,41 @@ export default function CookieConsent() {
   };
 
   const restoreFocus = () => {
-    requestAnimationFrame(() => previousFocusRef.current?.focus?.());
+    requestAnimationFrame(() => {
+      previousFocusRef.current?.focus?.();
+      previousFocusRef.current = null;
+    });
   };
 
   const closeWithAnim = (callback) => {
     setClosing(true);
 
     window.setTimeout(() => {
-      setClosing(false);
-      setVisible(false);
-      resetDrag();
       callback?.();
+      setClosing(false);
+      setManualOpen(false);
+      setPrefsOpen(false);
+      resetDrag();
       restoreFocus();
     }, 240);
   };
 
   const acceptAll = () => {
-    grantAll();
-    closeWithAnim();
+    closeWithAnim(grantAll);
   };
 
   const denyAll = () => {
-    rejectAll();
-    closeWithAnim();
+    closeWithAnim(rejectAll);
   };
 
   const savePrefs = () => {
-    updateConsent({ maps, analytics, marketing });
-    closeWithAnim();
+    closeWithAnim(() => {
+      updateConsent({ maps, analytics, marketing });
+    });
   };
 
   const dismissForSession = () => {
-    try {
-      sessionStorage.setItem(SESSION_KEY, '1');
-    } catch {}
-
-    closeWithAnim();
+    closeWithAnim(dismissConsentForSession);
   };
 
   const onTouchStart = (event) => {
@@ -190,6 +196,7 @@ export default function CookieConsent() {
               {t('title')}
             </h3>
             <p className={s.text}>{t('description')}</p>
+
             <div className={s.actions}>
               <button
                 type="button"
