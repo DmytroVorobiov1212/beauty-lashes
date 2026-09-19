@@ -179,7 +179,6 @@ export default function Gallery() {
     >
       <div className="container">
         <SectionIntro
-          eyebrow={t('eyebrow')}
           title={t('title')}
           description={t('description')}
           titleId="gallery-title"
@@ -190,23 +189,23 @@ export default function Gallery() {
             <button
               type="button"
               key={src}
-              className={s.thumbBtn}
+              className={`${s.thumbBtn} ${index === 0 ? s.featured : ''}`}
               onClick={() => open(index)}
               aria-label={t('openPreview', { number: index + 1 })}
             >
               <Image
                 src={src}
                 alt={t('imageAlt', { number: index + 1 })}
-                width={400}
-                height={500}
+                width={index === 0 ? 900 : 400}
+                height={index === 0 ? 720 : 500}
                 className={s.thumbImg}
                 priority={index < 2}
-                sizes="(max-width: 600px) 45vw, (max-width: 1024px) 30vw, 240px"
+                sizes={
+                  index === 0
+                    ? '(max-width: 767px) 100vw, 70vw'
+                    : '(max-width: 600px) 45vw, (max-width: 1024px) 30vw, 240px'
+                }
               />
-              <span className={s.photoNumber} aria-hidden="true">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className={s.photoGlow} aria-hidden="true" />
             </button>
           ))}
         </div>
