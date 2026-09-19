@@ -65,7 +65,6 @@ export default function Contact() {
     >
       <div className="container">
         <SectionIntro
-          eyebrow={t('eyebrow')}
           title={t('title')}
           description={t('description')}
           titleId="contact-title"
