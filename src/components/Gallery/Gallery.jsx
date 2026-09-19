@@ -9,6 +9,8 @@ import { Keyboard } from 'swiper/modules';
 import 'swiper/css';
 
 import { FiChevronLeft, FiChevronRight, FiX } from 'react-icons/fi';
+
+import SectionIntro from '@/components/SectionIntro/SectionIntro';
 import s from './Gallery.module.css';
 
 const IMAGES = [
@@ -176,9 +178,12 @@ export default function Gallery() {
       aria-labelledby="gallery-title"
     >
       <div className="container">
-        <h2 id="gallery-title" className={s.title}>
-          {t('title')}
-        </h2>
+        <SectionIntro
+          eyebrow={t('eyebrow')}
+          title={t('title')}
+          description={t('description')}
+          titleId="gallery-title"
+        />
 
         <div className={s.grid}>
           {IMAGES.map((src, index) => (
@@ -195,9 +200,13 @@ export default function Gallery() {
                 width={400}
                 height={500}
                 className={s.thumbImg}
-                priority={index === 0}
-                sizes="(max-width: 600px) 45vw, (max-width: 1024px) 30vw, 400px"
+                priority={index < 2}
+                sizes="(max-width: 600px) 45vw, (max-width: 1024px) 30vw, 240px"
               />
+              <span className={s.photoNumber} aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className={s.photoGlow} aria-hidden="true" />
             </button>
           ))}
         </div>

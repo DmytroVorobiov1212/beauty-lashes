@@ -31,7 +31,9 @@
     "imageAlt": "Ukázka prodlužování řas {number}",
     "close": "Zavřít náhled",
     "previous": "Předchozí fotografie",
-    "next": "Další fotografie"
+    "next": "Další fotografie",
+    "eyebrow": "Portfolio",
+    "description": "Detail, lehkost a čistá práce v každém setu."
   },
   "Contact": {
     "title": "Kontakty",
@@ -46,7 +48,9 @@
     "settings": "Nastavení",
     "enableMap": "Povolit mapu",
     "mapConsentText": "Chcete-li zobrazit mapu, povolte prosím Mapy v nastavení cookies.",
-    "mapPreviewAlt": "Náhled mapy Tábor"
+    "mapPreviewAlt": "Náhled mapy Tábor",
+    "eyebrow": "Beauty Bar Tábor",
+    "description": "Objednejte se nebo se zastavte v centru Tábora."
   },
   "Prices": {
     "title": "Ceník",
@@ -62,7 +66,9 @@
   },
   "Team": {
     "title": "Náš tým",
-    "subtitle": "Zkušené lash stylistky. Sledujte nás na Instagramu."
+    "subtitle": "Zkušené lash stylistky. Sledujte nás na Instagramu.",
+    "eyebrow": "Beauty Bar tým",
+    "role": "Lash stylistka"
   },
   "Footer": {
     "copyright": "© {year} Dmytro Vorobiov. Všechna práva vyhrazena."
@@ -97,7 +103,9 @@
         "name": "Odstranění řas",
         "desc": "Šetrné profesionální odstranění bez poškození."
       }
-    }
+    },
+    "eyebrow": "Ceník",
+    "description": "Precizní styling podle tvaru očí a požadovaného efektu."
   },
   "Cookies": {
     "title": "Cookies",
@@ -122,5 +130,8 @@
     "mobileTitle": "Chcete termín?",
     "mobileHint": "Vyberte stylistku a kontakt",
     "close": "Zavřít"
+  },
+  "Common": {
+    "backToTop": "Zpět nahoru"
   }
 }

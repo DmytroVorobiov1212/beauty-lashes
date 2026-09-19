@@ -2,9 +2,10 @@
   position: sticky;
   top: 0;
   z-index: 80;
-  background: rgba(14, 15, 18, .78);
-  backdrop-filter: saturate(160%) blur(16px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(12, 13, 16, .8);
+  backdrop-filter: saturate(145%) blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, .07);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, .1);
 }
 
 .row {
@@ -109,7 +110,9 @@
 .mobilePanel {
   display: grid;
   grid-template-rows: 0fr;
-  background: rgba(14, 15, 18, .96);
+  background:
+    linear-gradient(180deg, rgba(242, 166, 179, .025), transparent 36%),
+    rgba(12, 13, 16, .985);
   border-top: 1px solid transparent;
   transition: grid-template-rows .25s ease, border-color .25s ease;
 }
@@ -132,14 +135,18 @@
 }
 
 .mobileNav > a {
-  padding: 12px 14px;
-  border-radius: 12px;
+  padding: 13px 14px;
+  border-radius: 13px;
   color: #fff;
   font-weight: 650;
 }
 
 .mobileNav > a:hover {
-  background: rgba(255, 255, 255, .05);
+  background: rgba(242, 166, 179, .06);
+}
+
+.mobileNav > a + a {
+  border-top: 1px solid rgba(255, 255, 255, .045);
 }
 
 .mobileBooking {
