@@ -31,7 +31,9 @@
     "imageAlt": "Eyelash extension example {number}",
     "close": "Close preview",
     "previous": "Previous photo",
-    "next": "Next photo"
+    "next": "Next photo",
+    "eyebrow": "Portfolio",
+    "description": "Detail, lightness and clean technique in every set."
   },
   "Contact": {
     "title": "Contacts",
@@ -46,7 +48,9 @@
     "settings": "Settings",
     "enableMap": "Enable map",
     "mapConsentText": "To view the map, please enable Maps in cookie settings.",
-    "mapPreviewAlt": "Map preview of Tábor"
+    "mapPreviewAlt": "Map preview of Tábor",
+    "eyebrow": "Beauty Bar Tábor",
+    "description": "Book your appointment or visit us in central Tábor."
   },
   "Prices": {
     "title": "Price list",
@@ -62,7 +66,9 @@
   },
   "Team": {
     "title": "Our Team",
-    "subtitle": "Experienced lash stylists. Follow us on Instagram."
+    "subtitle": "Experienced lash stylists. Follow us on Instagram.",
+    "eyebrow": "Beauty Bar team",
+    "role": "Lash stylist"
   },
   "Footer": {
     "copyright": "© {year} Dmytro Vorobiov. All rights reserved."
@@ -97,7 +103,9 @@
         "name": "Removal",
         "desc": "Gentle professional removal without damage."
       }
-    }
+    },
+    "eyebrow": "Price list",
+    "description": "Precise styling tailored to your eye shape and desired effect."
   },
   "Cookies": {
     "title": "Cookies",
@@ -122,5 +130,8 @@
     "mobileTitle": "Ready to book?",
     "mobileHint": "Choose a stylist and contact method",
     "close": "Close"
+  },
+  "Common": {
+    "backToTop": "Back to top"
   }
 }
