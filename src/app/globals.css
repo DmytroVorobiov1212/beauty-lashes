@@ -347,7 +347,7 @@ em {
   }
 
   .section {
-    padding-block: var(--space-10);
+    padding-block: 72px;
   }
 }
 
@@ -363,6 +363,6 @@ em {
   }
 
   .section {
-    padding-block: var(--space-12);
+    padding-block: 92px;
   }
 }
