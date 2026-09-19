@@ -19,6 +19,7 @@ export default function CookieConsent() {
   const [marketing, setMarketing] = useState(false);
 
   const startY = useRef(0);
+  const dragYRef = useRef(0);
   const [dragY, setDragY] = useState(0);
   const [dragging, setDragging] = useState(false);
 
@@ -42,16 +43,27 @@ export default function CookieConsent() {
         setPrefsOpen(true);
       };
     }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        delete window.__openConsent__;
+      }
+    };
   }, []);
+
+  const resetDrag = () => {
+    dragYRef.current = 0;
+    setDragY(0);
+    setDragging(false);
+  };
 
   const closeWithAnim = (cb) => {
     setClosing(true);
     window.setTimeout(() => {
       setClosing(false);
       setVisible(false);
-      setDragY(0);
-      setDragging(false);
-      cb && cb();
+      resetDrag();
+      cb?.();
     }, 240);
   };
 
@@ -59,35 +71,46 @@ export default function CookieConsent() {
     grantAll();
     closeWithAnim();
   };
+
   const denyAll = () => {
     rejectAll();
     closeWithAnim();
   };
+
   const savePrefs = () => {
     updateConsent({ maps, analytics, marketing });
     closeWithAnim();
   };
 
   const onTouchStart = (e) => {
-    setDragging(true);
     startY.current = e.touches[0].clientY;
+    dragYRef.current = 0;
+    setDragY(0);
+    setDragging(true);
   };
+
   const onTouchMove = (e) => {
     if (!dragging) return;
-    const dy = e.touches[0].clientY - startY.current;
+
+    const dy = Math.max(0, e.touches[0].clientY - startY.current);
+    dragYRef.current = dy;
+    setDragY(dy);
   };
+
   const onTouchEnd = () => {
     if (!dragging) return;
+
     const threshold = 120;
-    if (dragY > threshold) {
+    if (dragYRef.current > threshold) {
       try {
         sessionStorage.setItem(SESSION_KEY, '1');
       } catch {}
+
       closeWithAnim();
-    } else {
-      setDragY(0);
+      return;
     }
-    setDragging(false);
+
+    resetDrag();
   };
 
   if (!visible) return null;
