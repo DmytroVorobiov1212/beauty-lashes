@@ -53,7 +53,7 @@ export default function Offerings() {
                     {String(index + 1).padStart(2, '0')}
                   </span>
 
-                  <h3 className={s.name}>{t(`items.${key}.name`)}</h3>
+                  <span className={s.name}>{t(`items.${key}.name`)}</span>
 
                   <div className={s.right}>
                     <div className={s.price}>{fmt(price)}</div>
