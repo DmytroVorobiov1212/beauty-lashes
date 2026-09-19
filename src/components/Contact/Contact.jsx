@@ -28,9 +28,12 @@ const EMAIL = 'vakulenkonatala10@gmail.com';
 const OPERATOR = 'Natalia Vakulenko';
 const ICO = '19197489';
 
+const MAP_LAT = 49.41248661648474;
+const MAP_LNG = 14.657767926600082;
 const MAP_EMBED =
-  'https://www.google.com/maps?q=Beauty%20Bar%20Lashes%20T%C3%A1bor&output=embed';
-const MAP_LINK = 'https://maps.app.goo.gl/fPf2RveWmkiqSLrv9?g_st=ipc';
+  `https://www.google.com/maps?q=${MAP_LAT},${MAP_LNG}&z=17&output=embed`;
+const MAP_LINK =
+  `https://www.google.com/maps/search/?api=1&query=${MAP_LAT}%2C${MAP_LNG}`;
 
 export default function Contact() {
   const t = useTranslations('Contact');
