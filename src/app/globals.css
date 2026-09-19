@@ -56,7 +56,8 @@ ol {
   /* layout */
   --header-h: 64px;
   --container-pad: 16px;
-  --container-max: 1200px;\n  --mobile-booking-space: 88px;
+  --container-max: 1200px;
+  --mobile-booking-space: 88px;
 
   /* palette */
   --text: #F5F5F7;
@@ -118,7 +119,8 @@ body {
   font-family: var(--ff-sans);
   font-weight: 400;
   line-height: 1.6;
-  color: var(--text);\n  padding-bottom: var(--mobile-booking-space);
+  color: var(--text);
+  padding-bottom: var(--mobile-booking-space);
 
   background-color: #0e0f12;
 
