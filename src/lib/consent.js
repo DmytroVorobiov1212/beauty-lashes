@@ -1,7 +1,7 @@
 const COOKIE = 'MYNEXTAPP_CONSENT';
 const CONSENT_VERSION = 2;
 const MAX_AGE = 60 * 60 * 24 * 180;
-const SESSION_KEY = 'CONSENT_DISMISSED_SESSION';
+const SESSION_KEY = 'CONSENT_DISMISSED_SESSION_V2';
 const CHANGE_EVENT = 'consent:change';
 const SESSION_EVENT = 'consent:session-change';
 
