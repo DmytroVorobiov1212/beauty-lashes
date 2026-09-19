@@ -2,94 +2,53 @@
   position: relative;
   overflow: hidden;
   scroll-margin-top: calc(var(--header-h) + 8px);
-  min-height: calc(100svh - var(--header-h));
-  padding-block: clamp(30px, 6svh, 76px);
+  background: #0e0f12;
+}
+
+.section::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 52svh;
+  min-height: 390px;
+  max-height: 560px;
   background-image:
-    linear-gradient(
-      90deg,
-      rgba(31, 24, 27, .9) 0%,
-      rgba(31, 24, 27, .66) 31%,
-      rgba(31, 24, 27, .3) 57%,
-      rgba(31, 24, 27, .06) 78%
-    ),
+    linear-gradient(180deg, rgba(10, 11, 14, .02) 0%, rgba(10, 11, 14, .06) 68%, #0e0f12 100%),
     image-set(
       url('/hero/hero-mob.webp') 1x,
       url('/hero/hero-mob@2x.webp') 2x
     );
-  background-position: 0 0, 20% center;
-  background-size: auto, cover;
+  background-size: cover;
+  background-position: 20% center;
   background-repeat: no-repeat;
-}
-
-.section::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0;
-  height: 26%;
-  pointer-events: none;
-  background: linear-gradient(180deg, transparent, rgba(14, 15, 18, .82));
 }
 
 .inner {
   position: relative;
   z-index: 1;
-  max-width: 700px;
-  margin-top: clamp(94px, 15svh, 148px);
-  margin-left: 0;
-  padding: 12px 0 22px;
-}
-
-.inner::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  width: min(430px, 82vw);
-  height: 300px;
-  left: -90px;
-  bottom: -72px;
-  border-radius: 50%;
-  pointer-events: none;
-  background: rgba(222, 110, 140, .09);
-  filter: blur(62px);
-}
-
-.eyebrow {
-  width: fit-content;
-  margin: 0 0 14px;
-  padding: 7px 11px;
-  border-radius: 999px;
-  color: rgba(255, 255, 255, .94);
-  background: rgba(14, 15, 18, .5);
-  border: 1px solid rgba(255, 255, 255, .14);
-  backdrop-filter: blur(12px);
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: .11em;
-  text-transform: uppercase;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, .14);
+  max-width: 680px;
+  padding: 28px 0 54px;
 }
 
 .title {
   max-width: 11ch;
   margin: 0 0 16px;
-  font-size: clamp(42px, 8vw, 68px);
-  line-height: .98;
-  letter-spacing: -.045em;
-  background: linear-gradient(130deg, #fff 0%, #f7edf1 52%, #f0a1b1 100%);
+  font-size: clamp(46px, 12vw, 68px);
+  line-height: .96;
+  letter-spacing: -.05em;
+  background: linear-gradient(130deg, #fff 0%, #f8eef1 55%, #f1a7b5 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   text-wrap: balance;
-  text-shadow: 0 14px 40px rgba(0, 0, 0, .24);
 }
 
 .subtitle {
-  max-width: 43ch;
+  max-width: 40ch;
   margin: 0 0 24px;
-  color: rgba(240, 235, 242, .86);
-  font-size: clamp(16px, 2vw, 19px);
-  line-height: 1.62;
+  color: rgba(239, 234, 241, .8);
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 .ctaWrap {
@@ -97,121 +56,98 @@
 }
 
 .heroCta {
-  min-width: 168px;
   min-height: 50px;
   padding-inline: 22px;
-  font-size: 16px;
+  font-size: 15px;
   box-shadow:
-    0 16px 34px rgba(222, 110, 140, .2),
-    inset 0 1px 0 rgba(255, 255, 255, .18);
+    0 14px 32px rgba(222, 110, 140, .2),
+    inset 0 1px 0 rgba(255, 255, 255, .16);
 }
 
 .proof {
-  width: fit-content;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
+  gap: 7px;
+  margin: 18px 0 0;
+  color: rgba(232, 227, 235, .58);
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.proof > span:not(.dot) {
-  padding: 6px 9px;
-  border-radius: 999px;
-  color: rgba(255, 255, 255, .76);
-  background: rgba(14, 15, 18, .3);
-  border: 1px solid rgba(255, 255, 255, .08);
-  backdrop-filter: blur(8px);
-  font-size: 11px;
-  font-weight: 650;
-}
-
-.dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 14px var(--accent);
+.separator {
+  color: var(--accent);
 }
 
 @media (orientation: landscape) and (max-height: 430px) {
-  .section {
-    min-height: 120svh;
-  }
-
-  .inner {
-    margin-top: 34px;
-  }
-}
-
-@media (max-width: 767.98px) {
-  .section {
-    background-image:
-      linear-gradient(
-        90deg,
-        rgba(27, 21, 24, .89) 0%,
-        rgba(27, 21, 24, .68) 42%,
-        rgba(27, 21, 24, .28) 78%,
-        rgba(27, 21, 24, .08) 100%
-      ),
-      image-set(
-        url('/hero/hero-mob.webp') 1x,
-        url('/hero/hero-mob@2x.webp') 2x
-      );
-  }
-
-  .title {
-    max-width: 10ch;
-  }
-
-  .proof {
-    max-width: 100%;
+  .section::before {
+    height: 78svh;
+    min-height: 300px;
   }
 }
 
 @media (min-width: 768px) {
   .section {
-    background-position: 0 0, center;
+    min-height: calc(100svh - var(--header-h));
+    display: flex;
+    align-items: stretch;
+  }
+
+  .section::before {
+    position: absolute;
+    inset: 0;
+    height: auto;
+    min-height: 0;
+    max-height: none;
     background-image:
       linear-gradient(
         90deg,
-        rgba(31, 24, 27, .88) 0%,
-        rgba(31, 24, 27, .58) 30%,
-        rgba(31, 24, 27, .2) 57%,
-        rgba(31, 24, 27, 0) 76%
+        rgba(28, 22, 25, .88) 0%,
+        rgba(28, 22, 25, .58) 30%,
+        rgba(28, 22, 25, .18) 56%,
+        rgba(28, 22, 25, 0) 76%
       ),
       image-set(
         url('/hero/hero-tablet.webp') 1x,
         url('/hero/hero-tablet@2x.webp') 2x
       );
+    background-position: center;
+  }
+
+  .section > :global(.container) {
+    position: relative;
+    z-index: 1;
+    display: flex;
   }
 
   .inner {
-    margin-top: clamp(105px, 16svh, 170px);
+    align-self: center;
     margin-left: auto;
+    padding: 72px 0;
+  }
+
+  .title {
+    font-size: clamp(56px, 6.4vw, 84px);
+  }
+
+  .subtitle {
+    font-size: clamp(17px, 1.8vw, 20px);
   }
 }
 
 @media (min-width: 1440px) {
-  .section {
-    padding-block: 84px;
+  .section::before {
     background-image:
       linear-gradient(
         90deg,
-        rgba(31, 24, 27, .86) 0%,
-        rgba(31, 24, 27, .55) 28%,
-        rgba(31, 24, 27, .17) 55%,
-        rgba(31, 24, 27, 0) 74%
+        rgba(28, 22, 25, .86) 0%,
+        rgba(28, 22, 25, .54) 28%,
+        rgba(28, 22, 25, .16) 55%,
+        rgba(28, 22, 25, 0) 74%
       ),
       image-set(
         url('/hero/hero-desc.webp') 1x,
         url('/hero/hero-desc@2x.webp') 2x
       );
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .heroCta {
-    transition: none;
   }
 }
