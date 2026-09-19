@@ -1,0 +1,43 @@
+name: Secure dependency refresh
+
+on:
+  push:
+    branches:
+      - upgrade/foundation-polish
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: contains(github.event.head_commit.message, '[deps-refresh]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: upgrade/foundation-polish
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Upgrade Maintenance LTS framework packages
+        run: npm install --save-exact next@15.5.25 && npm install --save-dev --save-exact eslint-config-next@15.5.25
+
+      - name: Verify framework version
+        run: npm ls next eslint-config-next
+
+      - name: Commit generated lockfile
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Upgrade Next.js Maintenance LTS to 15.5.25"
+            git push origin HEAD:upgrade/foundation-polish
+          fi
