@@ -1,1 +1,1 @@
-Retry framework/runtime upgrade after the Next.js 16 ESLint migration.
+Retry framework/runtime upgrade after React 19 external-store refactors.
