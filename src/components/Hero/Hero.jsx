@@ -36,12 +36,8 @@ export default function Hero() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.35 }}
+          viewport={{ once: true, amount: 0.25 }}
         >
-          <m.p className={s.eyebrow} variants={item}>
-            {t('eyebrow')}
-          </m.p>
-
           <m.h1 className={s.title} variants={item}>
             {t('title')}
           </m.h1>
@@ -54,11 +50,11 @@ export default function Hero() {
             <BookingMenu className={s.heroCta} />
           </m.div>
 
-          <m.div className={s.proof} variants={item} aria-label={t('proofAria')}>
+          <m.p className={s.proof} variants={item} aria-label={t('proofAria')}>
             <span>{t('proofLocation')}</span>
-            <span className={s.dot} aria-hidden="true" />
+            <span className={s.separator} aria-hidden="true">·</span>
             <span>{t('proofTeam')}</span>
-          </m.div>
+          </m.p>
         </m.div>
       </div>
     </section>
