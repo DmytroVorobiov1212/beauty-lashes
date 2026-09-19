@@ -1,4 +1,5 @@
 const COOKIE = 'MYNEXTAPP_CONSENT';
+const CONSENT_VERSION = 2;
 const MAX_AGE = 60 * 60 * 24 * 180;
 const SESSION_KEY = 'CONSENT_DISMISSED_SESSION';
 const CHANGE_EVENT = 'consent:change';
@@ -21,12 +22,16 @@ export function readConsent() {
 
     const consent = JSON.parse(raw);
 
+    if (Number(consent.v) !== CONSENT_VERSION) {
+      return null;
+    }
+
     return {
       necessary: true,
       maps: !!consent.maps,
       analytics: !!consent.analytics,
       marketing: !!consent.marketing,
-      v: 1,
+      v: CONSENT_VERSION,
       ts: consent.ts || 0,
     };
   } catch {
@@ -46,7 +51,7 @@ export function writeConsent(next) {
     maps: !!next.maps,
     analytics: !!next.analytics,
     marketing: !!next.marketing,
-    v: 1,
+    v: CONSENT_VERSION,
     ts: Date.now(),
   };
 
