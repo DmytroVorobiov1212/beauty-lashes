@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FiChevronDown, FiInstagram, FiPhone } from 'react-icons/fi';
+import { FiInstagram, FiPhone, FiX } from 'react-icons/fi';
 
 import s from './BookingMenu.module.css';
 
@@ -20,20 +21,18 @@ const MASTERS = [
   },
 ];
 
-export default function BookingMenu({ className = '', align = 'left' }) {
+export default function BookingMenu({ className = '' }) {
   const t = useTranslations('Booking');
   const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-  const firstLinkRef = useRef(null);
+  const triggerRef = useRef(null);
+  const closeRef = useRef(null);
+  const previousOverflowRef = useRef('');
 
   useEffect(() => {
     if (!open) return;
 
-    const onPointerDown = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOpen(false);
-      }
-    };
+    previousOverflowRef.current = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
 
     const onKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -41,76 +40,107 @@ export default function BookingMenu({ className = '', align = 'left' }) {
       }
     };
 
-    document.addEventListener('pointerdown', onPointerDown);
     document.addEventListener('keydown', onKeyDown);
-    firstLinkRef.current?.focus();
+    requestAnimationFrame(() => closeRef.current?.focus());
 
     return () => {
-      document.removeEventListener('pointerdown', onPointerDown);
       document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = previousOverflowRef.current;
+      requestAnimationFrame(() => triggerRef.current?.focus());
     };
   }, [open]);
 
-  return (
-    <div className={s.wrap} ref={ref}>
-      <button
-        type="button"
-        className={`${s.cta} ${className}`}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        onClick={() => setOpen((value) => !value)}
-      >
-        <span>{t('cta')}</span>
-        <FiChevronDown
-          aria-hidden
-          className={`${s.chevron} ${open ? s.chevronOpen : ''}`}
-        />
-      </button>
-
-      <AnimatePresence>
-        {open ? (
-          <motion.div
-            className={`${s.menu} ${align === 'right' ? s.menuRight : ''}`}
-            role="menu"
-            aria-label={t('chooseMaster')}
-            initial={{ opacity: 0, y: 8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.98 }}
-            transition={{ duration: 0.18 }}
-          >
-            <p className={s.menuTitle}>{t('chooseMaster')}</p>
-
-            {MASTERS.map((master, index) => (
-              <div className={s.master} key={master.name}>
-                <strong className={s.name}>{master.name}</strong>
-                <div className={s.actions}>
-                  <a
-                    ref={index === 0 ? firstLinkRef : undefined}
-                    href={`tel:${master.phone}`}
-                    className={s.action}
-                    role="menuitem"
+  const modal =
+    open && typeof document !== 'undefined'
+      ? createPortal(
+          <AnimatePresence>
+            <motion.div
+              className={s.overlay}
+              role="presentation"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.16 }}
+              onPointerDown={(event) => {
+                if (event.target === event.currentTarget) {
+                  setOpen(false);
+                }
+              }}
+            >
+              <motion.div
+                className={s.sheet}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="booking-title"
+                initial={{ opacity: 0, y: 28, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 24, scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className={s.sheetHeader}>
+                  <h2 id="booking-title" className={s.menuTitle}>
+                    {t('chooseMaster')}
+                  </h2>
+                  <button
+                    ref={closeRef}
+                    type="button"
+                    className={s.close}
+                    aria-label={t('close')}
                     onClick={() => setOpen(false)}
                   >
-                    <FiPhone aria-hidden />
-                    <span>{t('call')}</span>
-                  </a>
-                  <a
-                    href={master.instagram}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={s.action}
-                    role="menuitem"
-                    onClick={() => setOpen(false)}
-                  >
-                    <FiInstagram aria-hidden />
-                    <span>Instagram</span>
-                  </a>
+                    <FiX aria-hidden />
+                  </button>
                 </div>
-              </div>
-            ))}
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
-    </div>
+
+                <div className={s.masterList}>
+                  {MASTERS.map((master) => (
+                    <div className={s.master} key={master.name}>
+                      <strong className={s.name}>{master.name}</strong>
+                      <div className={s.actions}>
+                        <a
+                          href={`tel:${master.phone}`}
+                          className={s.action}
+                          onClick={() => setOpen(false)}
+                        >
+                          <FiPhone aria-hidden />
+                          <span>{t('call')}</span>
+                        </a>
+                        <a
+                          href={master.instagram}
+                          target="_blank"
+                          rel="noreferrer"
+                          className={s.action}
+                          onClick={() => setOpen(false)}
+                        >
+                          <FiInstagram aria-hidden />
+                          <span>Instagram</span>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>,
+          document.body,
+        )
+      : null;
+
+  return (
+    <>
+      <div className={s.wrap}>
+        <button
+          ref={triggerRef}
+          type="button"
+          className={`${s.cta} ${className}`}
+          aria-haspopup="dialog"
+          aria-expanded={open}
+          onClick={() => setOpen(true)}
+        >
+          {t('cta')}
+        </button>
+      </div>
+      {modal}
+    </>
   );
 }

@@ -83,7 +83,7 @@ export default function NavBar() {
 
           <div className={s.actions}>
             <div className={s.desktopBooking}>
-              <BookingMenu align="right" />
+              <BookingMenu />
             </div>
             <LangSwitcher />
             <button

@@ -120,6 +120,7 @@
     "chooseMaster": "Vyberte stylistku",
     "call": "Zavolat",
     "mobileTitle": "Chcete termín?",
-    "mobileHint": "Vyberte stylistku a kontakt"
+    "mobileHint": "Vyberte stylistku a kontakt",
+    "close": "Zavřít"
   }
 }

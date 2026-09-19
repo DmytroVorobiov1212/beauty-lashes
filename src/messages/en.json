@@ -120,6 +120,7 @@
     "chooseMaster": "Choose your stylist",
     "call": "Call",
     "mobileTitle": "Ready to book?",
-    "mobileHint": "Choose a stylist and contact method"
+    "mobileHint": "Choose a stylist and contact method",
+    "close": "Close"
   }
 }
