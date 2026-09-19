@@ -14,9 +14,9 @@ import SectionIntro from '@/components/SectionIntro/SectionIntro';
 import s from './Gallery.module.css';
 
 const IMAGES = [
+  '/gallery/3.webp',
   '/gallery/1.webp',
   '/gallery/2.webp',
-  '/gallery/3.webp',
   '/gallery/4.webp',
   '/gallery/5.webp',
   '/gallery/6.webp',

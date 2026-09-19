@@ -103,21 +103,24 @@ export default function NavBar() {
       <div
         id="mobile-navigation"
         className={`${s.mobilePanel} ${menuOpen ? s.mobilePanelOpen : ''}`}
+        aria-hidden={!menuOpen}
       >
-        <nav className={s.mobileNav} aria-label={t('primaryAria')}>
-          {items.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              onClick={() => setMenuOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
-          <div className={s.mobileBooking}>
-            <BookingMenu />
-          </div>
-        </nav>
+        <div className={s.mobileClip}>
+          <nav className={s.mobileNav} aria-label={t('primaryAria')}>
+            {items.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <div className={s.mobileBooking}>
+              <BookingMenu />
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
   );
