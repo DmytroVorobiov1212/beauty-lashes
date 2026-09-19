@@ -51,7 +51,7 @@ export default function Hero() {
           </m.p>
 
           <m.div className={s.ctaWrap} variants={item}>
-            <BookingMenu />
+            <BookingMenu className={s.heroCta} />
           </m.div>
 
           <m.div className={s.proof} variants={item} aria-label={t('proofAria')}>
