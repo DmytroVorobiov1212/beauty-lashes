@@ -1,56 +1,57 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import LangSwitcher from '../LangSwitcher/LangSwitcher';
 import { useEffect, useState } from 'react';
-import { m } from 'framer-motion';
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
+import { FiMenu, FiX } from 'react-icons/fi';
+
+import BookingMenu from '@/components/BookingMenu/BookingMenu';
+import LangSwitcher from '@/components/LangSwitcher/LangSwitcher';
 import s from './NavBar.module.css';
 
 export default function NavBar() {
-  const tNav = useTranslations('Nav');
-  const tServices = useTranslations('Services');
-  const tGallery = useTranslations('Gallery');
-  const tPrices = useTranslations('Prices');
-
-  const OBSERVE_IDS = ['hero', 'services', 'prices', 'gallery', 'contact'];
+  const t = useTranslations('Nav');
   const [active, setActive] = useState('');
-
-  useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-      { rootMargin: '-55% 0px -40% 0px', threshold: 0.1 },
-    );
-    OBSERVE_IDS.map((id) => document.getElementById(id))
-      .filter(Boolean)
-      .forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const items = [
-    { id: 'services', label: tServices('title') },
-    { id: 'prices', label: tPrices('title') },
-    { id: 'gallery', label: tGallery('title') },
-    { id: 'contact', label: tNav('contact') },
+    { id: 'services', label: t('services') },
+    { id: 'gallery', label: t('gallery') },
+    { id: 'team', label: t('team') },
+    { id: 'contact', label: t('contact') },
   ];
 
-  const container = {
-    hidden: { opacity: 1 },
-    show: {
-      opacity: 1,
-      transition: { delayChildren: 0.05, staggerChildren: 0.08 },
-    },
-  };
-  const link = {
-    hidden: { opacity: 0, y: 8, filter: 'blur(4px)' },
-    show: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: { duration: 0.4, ease: 'easeOut' },
-    },
-  };
+  useEffect(() => {
+    const ids = ['hero', ...items.map((item) => item.id)];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: '-35% 0px -50% 0px', threshold: [0.05, 0.2, 0.5] },
+    );
+
+    ids
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+      .forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setMenuOpen(false);
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [menuOpen]);
 
   return (
     <header className={s.header}>
@@ -59,41 +60,68 @@ export default function NavBar() {
           <a
             href="#hero"
             className={s.brand}
-            aria-label="Beauty Lashes Tábor — Home"
+            aria-label={t('homeAria')}
+            onClick={() => setMenuOpen(false)}
           >
             <Image
               src="/brand/beautybar-logo.webp"
-              alt="Beauty Lashes Tábor"
-              width={40}
-              height={40}
+              alt="Beauty Bar Lashes Tábor"
+              width={50}
+              height={50}
               className={s.brandImg}
               priority
             />
           </a>
 
-          <m.nav
-            className={s.links}
-            aria-label="Primary"
-            variants={container}
-            initial="hidden"
-            animate="show"
-          >
-            {items.map(({ id, label }) => (
-              <m.a
-                key={id}
-                href={`#${id}`}
-                aria-current={active === id ? 'true' : undefined}
-                variants={link}
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
+          <nav className={s.desktopNav} aria-label={t('primaryAria')}>
+            {items.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                aria-current={active === item.id ? 'location' : undefined}
               >
-                {label}
-              </m.a>
+                {item.label}
+              </a>
             ))}
-          </m.nav>
+          </nav>
 
-          <LangSwitcher />
+          <div className={s.actions}>
+            <div className={s.desktopBooking}>
+              <BookingMenu align="right" />
+            </div>
+            <LangSwitcher />
+            <button
+              type="button"
+              className={s.menuButton}
+              aria-label={menuOpen ? t('closeMenu') : t('openMenu')}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
+              onClick={() => setMenuOpen((value) => !value)}
+            >
+              {menuOpen ? <FiX aria-hidden /> : <FiMenu aria-hidden />}
+            </button>
+          </div>
         </div>
+      </div>
+
+      <div
+        id="mobile-navigation"
+        className={`${s.mobilePanel} ${menuOpen ? s.mobilePanelOpen : ''}`}
+      >
+        <nav className={s.mobileNav} aria-label={t('primaryAria')}>
+          {items.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
+          <div className={s.mobileBooking}>
+            <BookingMenu />
+          </div>
+        </nav>
       </div>
     </header>
   );
