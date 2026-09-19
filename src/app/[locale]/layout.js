@@ -6,6 +6,7 @@ import { Manrope, Noto_Serif_Display } from 'next/font/google';
 import Navbar from '@/components/NavBar/NavBar';
 import BackToTop from '@/components/BackToTop/BackToTop';
 import CookieConsent from '@/components/CookieConsent/CookieConsent';
+import MobileBookingBar from '@/components/MobileBookingBar/MobileBookingBar';
 import JsonLd from '@/components/SEO/JsonLd';
 import MotionProvider from '@/components/Providers/MotionProvider';
 import { routing } from '@/i18n/routing';
@@ -150,8 +151,9 @@ export default async function LocaleLayout({ children, params }) {
             <Navbar />
             {children}
             <BackToTop />
+            <MobileBookingBar />
             <CookieConsent />
-            <JsonLd />
+            <JsonLd locale={locale} />
           </NextIntlClientProvider>
         </MotionProvider>
       </body>
