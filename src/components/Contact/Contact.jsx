@@ -2,8 +2,15 @@
 
 import { useSyncExternalStore } from 'react';
 import { useTranslations } from 'next-intl';
-import { FiPhone, FiMail, FiInstagram } from 'react-icons/fi';
+import {
+  FiArrowUpRight,
+  FiInstagram,
+  FiMail,
+  FiMapPin,
+  FiPhone,
+} from 'react-icons/fi';
 
+import SectionIntro from '@/components/SectionIntro/SectionIntro';
 import {
   getMapsAllowedServerSnapshot,
   getMapsAllowedSnapshot,
@@ -57,104 +64,113 @@ export default function Contact() {
       aria-labelledby="contact-title"
     >
       <div className="container">
-        <h2 id="contact-title" className={s.title}>
-          {t('title')}
-        </h2>
+        <SectionIntro
+          eyebrow={t('eyebrow')}
+          title={t('title')}
+          description={t('description')}
+          titleId="contact-title"
+        />
 
-        <div className={s.card}>
-          <div className={s.grid}>
-            <div className={s.info}>
-              {PHONES.map((phone) => (
-                <p className={s.row} key={phone}>
-                  <span className={`${s.ico} ${s.phone}`} aria-hidden="true">
-                    <FiPhone size={16} />
+        <div className={s.shell}>
+          <div className={s.info}>
+            <div className={s.primary}>
+              {PHONES.map((phone, index) => (
+                <a className={s.contactCard} href={`tel:${phone}`} key={phone}>
+                  <span className={s.contactIcon} aria-hidden="true">
+                    <FiPhone />
                   </span>
-                  <strong>{t('phoneLabel')}:</strong>
-                  <a className={`${s.link} ${s.mono}`} href={`tel:${phone}`}>
-                    {phone}
-                  </a>
-                </p>
+                  <span className={s.contactCopy}>
+                    <small>{t('phoneLabel')} {index + 1}</small>
+                    <strong>{phone}</strong>
+                  </span>
+                  <FiArrowUpRight className={s.contactArrow} aria-hidden="true" />
+                </a>
               ))}
 
-              <p className={s.row}>
-                <span className={`${s.ico} ${s.mail}`} aria-hidden="true">
-                  <FiMail size={16} />
+              <a className={s.contactCard} href={`mailto:${EMAIL}`}>
+                <span className={s.contactIcon} aria-hidden="true">
+                  <FiMail />
                 </span>
-                <strong>{t('emailLabel')}:</strong>
-                <a className={s.link} href={`mailto:${EMAIL}`}>
-                  {EMAIL}
-                </a>
-              </p>
-
-              <p className={s.row}>
-                <span className={`${s.ico} ${s.insta}`} aria-hidden="true">
-                  <FiInstagram size={16} />
+                <span className={s.contactCopy}>
+                  <small>{t('emailLabel')}</small>
+                  <strong className={s.breakable}>{EMAIL}</strong>
                 </span>
-                <strong>{t('instaLabel')}:</strong>
-                <a
-                  className={s.link}
-                  href={INSTA}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  @beauty.bar.tabor
-                </a>
-              </p>
+                <FiArrowUpRight className={s.contactArrow} aria-hidden="true" />
+              </a>
 
-              <p className={s.row}>
-                <span className={s.dot} aria-hidden="true" />
-                <strong>{t('operatorLabel')}:</strong>
-                <span>{OPERATOR}</span>
-              </p>
-
-              <p className={s.row}>
-                <span className={s.dot} aria-hidden="true" />
-                <strong>{t('icoLabel')}:</strong>
-                <span className={s.mono}>{ICO}</span>
-              </p>
-
-              <p className={s.row}>
-                <span className={s.dot} aria-hidden="true" />
-                <strong>{t('addressLabel')}:</strong>
-                <span className={s.addr}>{t('address')}</span>
-                <a
-                  className={s.link}
-                  href={MAP_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {t('mapOpen')}
-                </a>
-              </p>
+              <a
+                className={s.contactCard}
+                href={INSTA}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className={s.contactIcon} aria-hidden="true">
+                  <FiInstagram />
+                </span>
+                <span className={s.contactCopy}>
+                  <small>{t('instaLabel')}</small>
+                  <strong>@beauty.bar.tabor</strong>
+                </span>
+                <FiArrowUpRight className={s.contactArrow} aria-hidden="true" />
+              </a>
             </div>
 
-            {!mapsAllowed ? (
-              <div className={s.mapWrap}>
-                <picture>
-                  <source
-                    media="(min-width: 1440px)"
-                    srcSet="/map/map-static420.webp 420w"
-                    sizes="840px"
-                    type="image/webp"
-                  />
-                  <source
-                    media="(min-width: 768px)"
-                    srcSet="/map/map-static360.webp 360w"
-                    sizes="720px"
-                    type="image/webp"
-                  />
-                  <img
-                    src="/map/map-static320.webp"
-                    srcSet="/map/map-static320.webp 320w"
-                    sizes="95vw"
-                    alt={t('mapPreviewAlt')}
-                    className={s.map}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
+            <div className={s.meta}>
+              <div className={s.metaRow}>
+                <span>{t('operatorLabel')}</span>
+                <strong>{OPERATOR}</strong>
+              </div>
+              <div className={s.metaRow}>
+                <span>{t('icoLabel')}</span>
+                <strong className={s.mono}>{ICO}</strong>
+              </div>
+              <div className={s.metaRow}>
+                <span>{t('addressLabel')}</span>
+                <strong>{t('address')}</strong>
+              </div>
+            </div>
 
-                <div className={s.mapOverlay}>
+            <a
+              className={s.mapLink}
+              href={MAP_LINK}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FiMapPin aria-hidden="true" />
+              <span>{t('mapOpen')}</span>
+              <FiArrowUpRight aria-hidden="true" />
+            </a>
+          </div>
+
+          {!mapsAllowed ? (
+            <div className={s.mapWrap}>
+              <picture>
+                <source
+                  media="(min-width: 1440px)"
+                  srcSet="/map/map-static420.webp 420w"
+                  sizes="840px"
+                  type="image/webp"
+                />
+                <source
+                  media="(min-width: 768px)"
+                  srcSet="/map/map-static360.webp 360w"
+                  sizes="720px"
+                  type="image/webp"
+                />
+                <img
+                  src="/map/map-static320.webp"
+                  srcSet="/map/map-static320.webp 320w"
+                  sizes="95vw"
+                  alt={t('mapPreviewAlt')}
+                  className={s.map}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+
+              <div className={s.mapOverlay}>
+                <div className={s.mapConsentCard}>
+                  <FiMapPin className={s.mapConsentIcon} aria-hidden="true" />
                   <p>{t('mapConsentText')}</p>
                   <div className={s.mapButtons}>
                     <button
@@ -174,18 +190,18 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className={s.mapWrap}>
-                <iframe
-                  title={t('mapPreviewAlt')}
-                  src={MAP_EMBED}
-                  className={s.map}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className={s.mapWrap}>
+              <iframe
+                title={t('mapPreviewAlt')}
+                src={MAP_EMBED}
+                className={s.map}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          )}
         </div>
       </div>
     </section>
