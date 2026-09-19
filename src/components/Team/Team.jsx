@@ -61,7 +61,6 @@ export default function Team() {
     >
       <div className="container">
         <SectionIntro
-          eyebrow={t('eyebrow')}
           title={t('title')}
           description={t('subtitle')}
           titleId="team-title"
@@ -89,7 +88,6 @@ export default function Team() {
                   className={s.photo}
                 />
                 <div className={s.photoShade} aria-hidden="true" />
-                <span className={s.role}>{t('role')}</span>
               </div>
 
               <div className={s.body}>
