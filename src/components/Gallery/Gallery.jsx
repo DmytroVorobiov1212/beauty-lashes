@@ -27,14 +27,11 @@ const IMAGES = [
 export default function Gallery() {
   const t = useTranslations('Gallery');
   const [activeIdx, setActiveIdx] = useState(null);
-  const [mounted, setMounted] = useState(false);
 
   const swiperRef = useRef(null);
   const overlayRef = useRef(null);
   const closeRef = useRef(null);
   const previousFocusRef = useRef(null);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (activeIdx == null) return;
@@ -206,7 +203,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      {mounted && activeIdx != null
+      {typeof document !== 'undefined' && activeIdx != null
         ? createPortal(overlay, document.body)
         : null}
     </section>
