@@ -9,20 +9,16 @@ import BookingMenu from '@/components/BookingMenu/BookingMenu';
 import LangSwitcher from '@/components/LangSwitcher/LangSwitcher';
 import s from './NavBar.module.css';
 
+const NAV_IDS = ['services', 'gallery', 'team', 'contact'];
+
 export default function NavBar() {
   const t = useTranslations('Nav');
   const [active, setActive] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const items = [
-    { id: 'services', label: t('services') },
-    { id: 'gallery', label: t('gallery') },
-    { id: 'team', label: t('team') },
-    { id: 'contact', label: t('contact') },
-  ];
+  const items = NAV_IDS.map((id) => ({ id, label: t(id) }));
 
   useEffect(() => {
-    const ids = ['hero', ...items.map((item) => item.id)];
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -34,7 +30,7 @@ export default function NavBar() {
       { rootMargin: '-35% 0px -50% 0px', threshold: [0.05, 0.2, 0.5] },
     );
 
-    ids
+    ['hero', ...NAV_IDS]
       .map((id) => document.getElementById(id))
       .filter(Boolean)
       .forEach((element) => observer.observe(element));
