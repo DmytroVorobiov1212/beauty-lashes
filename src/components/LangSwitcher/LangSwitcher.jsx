@@ -1,69 +1,43 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import clsx from 'clsx';
+
+import { usePathname, useRouter } from '@/i18n/navigation';
 import s from './LangSwitcher.module.css';
 
-const COOKIE = 'MYNEXTAPP_LOCALE';
-const ALLOWED = ['en', 'uk', 'cs'];
-const DEFAULT = 'cs';
-
-function readCookie() {
-  const pair = document.cookie
-    .split('; ')
-    .find((r) => r.startsWith(`${COOKIE}=`));
-  return pair ? pair.split('=')[1] : '';
-}
-function writeCookie(value) {
-  document.cookie = `${COOKIE}=${value};`;
-}
+const LANGUAGES = [
+  { locale: 'cs', short: 'CZ', label: 'Čeština' },
+  { locale: 'uk', short: 'UA', label: 'Українська' },
+  { locale: 'en', short: 'EN', label: 'English' },
+];
 
 export default function LangSwitcher() {
-  const [locale, setLocale] = useState(DEFAULT);
+  const locale = useLocale();
+  const pathname = usePathname();
   const router = useRouter();
 
-  useEffect(() => {
-    const fromCookie = readCookie().toLowerCase();
-    setLocale(ALLOWED.includes(fromCookie) ? fromCookie : DEFAULT);
-  }, []);
+  const changeLocale = (nextLocale) => {
+    if (nextLocale === locale) return;
 
-  const changeLocale = (next) => {
-    if (!ALLOWED.includes(next)) return;
-    setLocale(next);
-    writeCookie(next);
-    router.refresh();
+    router.replace(pathname, { locale: nextLocale });
   };
 
   return (
     <nav className={s.wrap} aria-label="Language">
-      <button
-        type="button"
-        onClick={() => changeLocale('en')}
-        className={clsx(s.btn, locale === 'en' && s.active)}
-        aria-pressed={locale === 'en'}
-        title="English"
-      >
-        EN
-      </button>
-      <button
-        type="button"
-        onClick={() => changeLocale('uk')}
-        className={clsx(s.btn, locale === 'uk' && s.active)}
-        aria-pressed={locale === 'uk'}
-        title="Українська"
-      >
-        UA
-      </button>
-      <button
-        type="button"
-        onClick={() => changeLocale('cs')}
-        className={clsx(s.btn, locale === 'cs' && s.active)}
-        aria-pressed={locale === 'cs'}
-        title="Čeština"
-      >
-        CZ
-      </button>
+      {LANGUAGES.map((item) => (
+        <button
+          key={item.locale}
+          type="button"
+          onClick={() => changeLocale(item.locale)}
+          className={clsx(s.btn, locale === item.locale && s.active)}
+          aria-pressed={locale === item.locale}
+          aria-label={item.label}
+          title={item.label}
+        >
+          {item.short}
+        </button>
+      ))}
     </nav>
   );
 }

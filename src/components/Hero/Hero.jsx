@@ -1,9 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import s from './Hero.module.css';
-import CallMenu from '../CallMenu/CallMenu';
 import { m } from 'framer-motion';
+
+import BookingMenu from '@/components/BookingMenu/BookingMenu';
+import s from './Hero.module.css';
 
 const container = {
   hidden: { opacity: 0, y: 16 },
@@ -18,6 +19,7 @@ const container = {
     },
   },
 };
+
 const item = {
   hidden: { opacity: 0, y: 14 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7 } },
@@ -36,21 +38,26 @@ export default function Hero() {
           whileInView="show"
           viewport={{ once: true, amount: 0.35 }}
         >
+          <m.p className={s.eyebrow} variants={item}>
+            {t('eyebrow')}
+          </m.p>
+
           <m.h1 className={s.title} variants={item}>
             {t('title')}
           </m.h1>
+
           <m.p className={s.subtitle} variants={item}>
             {t('subtitle')}
           </m.p>
-          <m.div variants={item}>
-            <CallMenu
-              label={t('cta')}
-              className={s.cta}
-              phones={[
-                { label: 'Natalia', number: '+420775616298' },
-                { label: 'Anzhelika', number: '+420721460816' },
-              ]}
-            />
+
+          <m.div className={s.ctaWrap} variants={item}>
+            <BookingMenu />
+          </m.div>
+
+          <m.div className={s.proof} variants={item} aria-label={t('proofAria')}>
+            <span>{t('proofLocation')}</span>
+            <span className={s.dot} aria-hidden="true" />
+            <span>{t('proofTeam')}</span>
           </m.div>
         </m.div>
       </div>

@@ -1,14 +1,18 @@
 'use client';
+
+import { useSyncExternalStore } from 'react';
 import { useTranslations } from 'next-intl';
-import { FiPhone, FiMail, FiInstagram } from 'react-icons/fi'; // ⬅️ нове
-import s from './Contact.module.css';
-import { useEffect, useState } from 'react';
+import { FiPhone, FiMail, FiInstagram } from 'react-icons/fi';
+
 import {
-  readConsent,
-  onConsentChange,
+  getMapsAllowedServerSnapshot,
+  getMapsAllowedSnapshot,
   grantMapsOnly,
+  subscribeConsentStore,
   updateConsent,
 } from '@/lib/consent';
+
+import s from './Contact.module.css';
 
 const PHONES = ['+420721460816', '+420775616298'];
 const INSTA =
@@ -24,29 +28,26 @@ const MAP_LINK = 'https://maps.app.goo.gl/fPf2RveWmkiqSLrv9?g_st=ipc';
 export default function Contact() {
   const t = useTranslations('Contact');
 
-  const [mapsAllowed, setMapsAllowed] = useState(false);
-
-  useEffect(() => {
-    const c = readConsent();
-    setMapsAllowed(!!c?.maps);
-    const off = onConsentChange((next) => setMapsAllowed(!!next.maps));
-    return off;
-  }, []);
+  const mapsAllowed = useSyncExternalStore(
+    subscribeConsentStore,
+    getMapsAllowedSnapshot,
+    getMapsAllowedServerSnapshot,
+  );
 
   const enableMap = () => {
     grantMapsOnly();
-    setMapsAllowed(true);
   };
+
   const openConsentPreferences = () => {
     if (
       typeof window !== 'undefined' &&
       typeof window.__openConsent__ === 'function'
     ) {
       window.__openConsent__();
-    } else {
-      updateConsent({ maps: true });
-      setMapsAllowed(true);
+      return;
     }
+
+    updateConsent({ maps: true });
   };
 
   return (
@@ -63,17 +64,18 @@ export default function Contact() {
         <div className={s.card}>
           <div className={s.grid}>
             <div className={s.info}>
-              {PHONES.map((p) => (
-                <p className={s.row} key={p}>
+              {PHONES.map((phone) => (
+                <p className={s.row} key={phone}>
                   <span className={`${s.ico} ${s.phone}`} aria-hidden="true">
                     <FiPhone size={16} />
                   </span>
                   <strong>{t('phoneLabel')}:</strong>
-                  <a className={`${s.link} ${s.mono}`} href={`tel:${p}`}>
-                    {p}
+                  <a className={`${s.link} ${s.mono}`} href={`tel:${phone}`}>
+                    {phone}
                   </a>
                 </p>
               ))}
+
               <p className={s.row}>
                 <span className={`${s.ico} ${s.mail}`} aria-hidden="true">
                   <FiMail size={16} />
@@ -83,6 +85,7 @@ export default function Contact() {
                   {EMAIL}
                 </a>
               </p>
+
               <p className={s.row}>
                 <span className={`${s.ico} ${s.insta}`} aria-hidden="true">
                   <FiInstagram size={16} />
@@ -97,6 +100,7 @@ export default function Contact() {
                   @beauty.bar.tabor
                 </a>
               </p>
+
               <p className={s.row}>
                 <span className={s.dot} aria-hidden="true" />
                 <strong>{t('operatorLabel')}:</strong>
@@ -149,13 +153,19 @@ export default function Contact() {
                     decoding="async"
                   />
                 </picture>
+
                 <div className={s.mapOverlay}>
                   <p>{t('mapConsentText')}</p>
                   <div className={s.mapButtons}>
-                    <button className={s.mapBtn} onClick={enableMap}>
+                    <button
+                      type="button"
+                      className={s.mapBtn}
+                      onClick={enableMap}
+                    >
                       {t('enableMap')}
                     </button>
                     <button
+                      type="button"
                       className={s.mapBtnGhost}
                       onClick={openConsentPreferences}
                     >
@@ -167,7 +177,7 @@ export default function Contact() {
             ) : (
               <div className={s.mapWrap}>
                 <iframe
-                  title="Map"
+                  title={t('mapPreviewAlt')}
                   src={MAP_EMBED}
                   className={s.map}
                   loading="lazy"

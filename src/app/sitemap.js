@@ -1,13 +1,27 @@
-// app/sitemap.js
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://your-domain.tld';
+import { routing } from '@/i18n/routing';
+
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://beauty-lashes.vercel.app'
+).replace(/\/$/, '');
 
 export default function sitemap() {
-    return [
-        {
-            url: SITE_URL,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 1.0
-        }
-    ];
+  const languages = Object.fromEntries(
+    routing.locales.map((locale) => [
+      locale,
+      `${SITE_URL}/${locale}`,
+    ]),
+  );
+
+  return routing.locales.map((locale) => ({
+    url: `${SITE_URL}/${locale}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 1,
+    alternates: {
+      languages: {
+        ...languages,
+        'x-default': `${SITE_URL}/${routing.defaultLocale}`,
+      },
+    },
+  }));
 }

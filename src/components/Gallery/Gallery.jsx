@@ -1,7 +1,8 @@
 'use client';
+
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Keyboard } from 'swiper/modules';
@@ -25,108 +26,148 @@ const IMAGES = [
 
 export default function Gallery() {
   const t = useTranslations('Gallery');
+  const [activeIdx, setActiveIdx] = useState(null);
 
-  const [activeIdx, setActiveIdx] = useState(null); // number|null
-  const active = useMemo(
-    () => (activeIdx != null ? IMAGES[activeIdx] : null),
-    [activeIdx],
-  );
-  const [mounted, setMounted] = useState(false);
   const swiperRef = useRef(null);
-
-  useEffect(() => setMounted(true), []);
-
-  useEffect(() => {
-    if (activeIdx == null) return;
-    const onKey = (e) => e.key === 'Escape' && setActiveIdx(null);
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [activeIdx]);
+  const overlayRef = useRef(null);
+  const closeRef = useRef(null);
+  const previousFocusRef = useRef(null);
 
   useEffect(() => {
     if (activeIdx == null) return;
-    const prev = document.body.style.overflow;
+
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(() => closeRef.current?.focus());
+
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = previousOverflow;
     };
   }, [activeIdx]);
 
-  const open = (i) => setActiveIdx(i);
-  const close = () => setActiveIdx(null);
+  const open = (index) => {
+    previousFocusRef.current = document.activeElement;
+    setActiveIdx(index);
+  };
 
-  const overlay = active != null && (
-    <div
-      className={s.overlay}
-      onClick={close}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Image preview"
-    >
-      <button
-        className={s.close}
-        aria-label="Close"
-        onClick={(e) => {
-          e.stopPropagation();
-          close();
-        }}
-      >
-        <FiX />
-      </button>
-      <button
-        className={`${s.arrow} ${s.arrowLeft}`}
-        aria-label="Previous image"
-        onClick={(e) => {
-          e.stopPropagation();
-          swiperRef.current?.slidePrev();
-        }}
-      >
-        <FiChevronLeft />
-      </button>
-      <button
-        className={`${s.arrow} ${s.arrowRight}`}
-        aria-label="Next image"
-        onClick={(e) => {
-          e.stopPropagation();
-          swiperRef.current?.slideNext();
-        }}
-      >
-        <FiChevronRight />
-      </button>
+  const close = () => {
+    setActiveIdx(null);
 
-      <div className={s.frame} onClick={(e) => e.stopPropagation()}>
-        <Swiper
-          key={`lightbox-${activeIdx}`}
-          className={s.swiper}
-          modules={[Keyboard]}
-          onSwiper={(sw) => {
-            swiperRef.current = sw;
+    requestAnimationFrame(() => {
+      previousFocusRef.current?.focus?.();
+    });
+  };
+
+  const handleDialogKeyDown = (event) => {
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      close();
+      return;
+    }
+
+    if (event.key !== 'Tab' || !overlayRef.current) return;
+
+    const focusable = Array.from(
+      overlayRef.current.querySelectorAll(
+        'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+      ),
+    );
+
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
+  const overlay =
+    activeIdx != null ? (
+      <div
+        ref={overlayRef}
+        className={s.overlay}
+        onClick={close}
+        onKeyDown={handleDialogKeyDown}
+        role="dialog"
+        aria-modal="true"
+        aria-label={t('previewDialog')}
+      >
+        <button
+          ref={closeRef}
+          type="button"
+          className={s.close}
+          aria-label={t('close')}
+          onClick={(event) => {
+            event.stopPropagation();
+            close();
           }}
-          initialSlide={activeIdx ?? 0}
-          keyboard={{ enabled: true }}
-          loop={IMAGES.length > 1}
-          spaceBetween={8}
-          slidesPerView={1}
         >
-          {IMAGES.map((src, i) => (
-            <SwiperSlide key={src}>
-              <div className={s.slide}>
-                <Image
-                  src={src}
-                  alt={`Preview ${i + 1}`}
-                  fill
-                  className={s.preview}
-                  // sizes="95vw"
-                  sizes="(max-width: 768px) 95vw, (max-width: 1280px) 85vw, 1200px"
-                  priority={i === (activeIdx ?? 0)}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          <FiX aria-hidden />
+        </button>
+
+        <button
+          type="button"
+          className={`${s.arrow} ${s.arrowLeft}`}
+          aria-label={t('previous')}
+          onClick={(event) => {
+            event.stopPropagation();
+            swiperRef.current?.slidePrev();
+          }}
+        >
+          <FiChevronLeft aria-hidden />
+        </button>
+
+        <button
+          type="button"
+          className={`${s.arrow} ${s.arrowRight}`}
+          aria-label={t('next')}
+          onClick={(event) => {
+            event.stopPropagation();
+            swiperRef.current?.slideNext();
+          }}
+        >
+          <FiChevronRight aria-hidden />
+        </button>
+
+        <div className={s.frame} onClick={(event) => event.stopPropagation()}>
+          <Swiper
+            key={`lightbox-${activeIdx}`}
+            className={s.swiper}
+            modules={[Keyboard]}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            initialSlide={activeIdx}
+            keyboard={{ enabled: true }}
+            loop={IMAGES.length > 1}
+            spaceBetween={8}
+            slidesPerView={1}
+          >
+            {IMAGES.map((src, index) => (
+              <SwiperSlide key={src}>
+                <div className={s.slide}>
+                  <Image
+                    src={src}
+                    alt={t('imageAlt', { number: index + 1 })}
+                    fill
+                    className={s.preview}
+                    sizes="(max-width: 768px) 95vw, (max-width: 1280px) 85vw, 1200px"
+                    priority={index === activeIdx}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
-    </div>
-  );
+    ) : null;
 
   return (
     <section
@@ -138,21 +179,23 @@ export default function Gallery() {
         <h2 id="gallery-title" className={s.title}>
           {t('title')}
         </h2>
+
         <div className={s.grid}>
-          {IMAGES.map((src, i) => (
+          {IMAGES.map((src, index) => (
             <button
+              type="button"
               key={src}
               className={s.thumbBtn}
-              onClick={() => open(i)}
-              aria-label={`Open preview ${i + 1}`}
+              onClick={() => open(index)}
+              aria-label={t('openPreview', { number: index + 1 })}
             >
               <Image
                 src={src}
-                alt={`Lashes ${i + 1}`}
+                alt={t('imageAlt', { number: index + 1 })}
                 width={400}
                 height={500}
                 className={s.thumbImg}
-                priority={i === 0}
+                priority={index === 0}
                 sizes="(max-width: 600px) 45vw, (max-width: 1024px) 30vw, 400px"
               />
             </button>
@@ -160,7 +203,9 @@ export default function Gallery() {
         </div>
       </div>
 
-      {mounted && active != null ? createPortal(overlay, document.body) : null}
+      {typeof document !== 'undefined' && activeIdx != null
+        ? createPortal(overlay, document.body)
+        : null}
     </section>
   );
 }

@@ -1,11 +1,22 @@
 {
   "Nav": {
-    "contact": "Contact"
+    "contact": "Contact",
+    "services": "Services & prices",
+    "gallery": "Our work",
+    "team": "Our team",
+    "homeAria": "Beauty Bar Lashes Tábor — home",
+    "primaryAria": "Primary navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "Hero": {
     "title": "Perfect lashes in Tábor",
-    "subtitle": "Classic, 2D/3D & wet effect — safe, comfy, long-lasting.",
-    "cta": "Call now"
+    "subtitle": "Classic, 2D/3D, wet effect and volume — precise, gentle and focused on your comfort.",
+    "cta": "Call now",
+    "eyebrow": "Beauty Bar Lashes • Tábor",
+    "proofAria": "Salon information",
+    "proofLocation": "Central Tábor",
+    "proofTeam": "2 experienced lash stylists"
   },
   "Services": {
     "title": "Services",
@@ -14,7 +25,13 @@
     "item3": "Wet effect"
   },
   "Gallery": {
-    "title": "Our work"
+    "title": "Our work",
+    "previewDialog": "Photo preview",
+    "openPreview": "Open photo {number}",
+    "imageAlt": "Eyelash extension example {number}",
+    "close": "Close preview",
+    "previous": "Previous photo",
+    "next": "Next photo"
   },
   "Contact": {
     "title": "Contacts",
@@ -97,5 +114,12 @@
     "marketingHint": "Advertising/remarketing pixels.",
     "back": "Back",
     "save": "Save"
+  },
+  "Booking": {
+    "cta": "Book now",
+    "chooseMaster": "Choose your stylist",
+    "call": "Call",
+    "mobileTitle": "Ready to book?",
+    "mobileHint": "Choose a stylist and contact method"
   }
 }

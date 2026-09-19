@@ -1,0 +1,118 @@
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.cta {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 17px;
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent-2), var(--accent));
+  box-shadow: 0 10px 28px rgba(222, 110, 140, .22);
+  transition: transform .16s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 14px 34px rgba(222, 110, 140, .28);
+}
+
+.cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.chevron {
+  transition: transform .2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  width: min(310px, calc(100vw - 32px));
+  padding: 10px;
+  border-radius: 18px;
+  background: rgba(18, 19, 24, .97);
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .45);
+  backdrop-filter: blur(18px);
+  z-index: 120;
+}
+
+.menuRight {
+  left: auto;
+  right: 0;
+}
+
+.menuTitle {
+  margin: 2px 4px 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.master {
+  padding: 10px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .04);
+}
+
+.master + .master {
+  margin-top: 8px;
+}
+
+.name {
+  display: block;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+
+.action {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: #fff;
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .08);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.action:hover {
+  background: var(--accent-a12);
+  border-color: var(--accent-a18);
+}
+
+.action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta,
+  .chevron {
+    transition: none;
+  }
+}
