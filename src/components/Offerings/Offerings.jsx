@@ -38,7 +38,6 @@ export default function Offerings() {
 
       <div className="container">
         <SectionIntro
-          eyebrow={t('eyebrow')}
           title={t('title')}
           description={t('description')}
           titleId="offerings-title"
