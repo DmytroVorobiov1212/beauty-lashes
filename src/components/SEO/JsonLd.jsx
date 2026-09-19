@@ -1,9 +1,6 @@
-import { getLocale } from 'next-intl/server';
-
-export default async function JsonLd() {
-  const lang = (await getLocale()) || 'cs';
+export default function JsonLd({ locale = 'cs' }) {
   const site = (
-    process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://beauty-lashes.vercel.app'
   ).replace(/\/$/, '');
 
   const data = {
@@ -11,8 +8,8 @@ export default async function JsonLd() {
     '@type': 'BeautySalon',
     '@id': `${site}/#beauty-salon`,
     name: 'Beauty Bar Lashes Tábor',
-    url: site,
-    inLanguage: lang,
+    url: `${site}/${locale}`,
+    inLanguage: locale,
     email: 'vakulenkonatala10@gmail.com',
     telephone: '+420721460816',
     contactPoint: [
