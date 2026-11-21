@@ -8,12 +8,12 @@ import SectionIntro from '@/components/SectionIntro/SectionIntro';
 import s from './Offerings.module.css';
 
 const ITEMS = [
-  { key: 'classic', price: 800 },
-  { key: '2d3d', price: 800 },
-  { key: 'wetEffect', price: 900 },
-  { key: '4d5d', price: 1000 },
+  { key: 'classic', price: 900 },
+  { key: '2d', price: 900 },
+  { key: '3d', price: 1000 },
+  { key: '4d', price: 1100 },
+  { key: '5d', price: 1200 },
   { key: 'volume', price: 1200 },
-  { key: 'removal', price: 100 },
 ];
 
 export default function Offerings() {
