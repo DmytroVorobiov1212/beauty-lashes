@@ -56,11 +56,11 @@
     "title": "Ceník",
     "items": {
       "classic": "Klasika",
-      "2d3d": "2D–3D",
-      "wetEffect": "Mokrý efekt",
-      "4d5d": "4D–5D",
-      "volume": "Objem (Volume)",
-      "removal": "Odstranění řas"
+      "2d": "2D Lashes",
+      "3d": "3D Lashes",
+      "4d": "4D Lashes",
+      "5d": "5D Lashes",
+      "volume": "Objem (Volume)"
     },
     "note": "Ceny jsou uvedeny v Kč."
   },
@@ -81,27 +81,27 @@
     "items": {
       "classic": {
         "name": "Klasika",
-        "desc": "Jedna umělá řasa na jednu přirozenou – čistý, přirozený vzhled."
+        "desc": "Přirozená krása v každém pohledu. Jemné prodloužení řas pro něžný a elegantní vzhled."
       },
-      "2d3d": {
-        "name": "2D / 3D",
-        "desc": "Malé vějířky pro plnější linii bez zbytečné zátěže."
+      "2d": {
+        "name": "2D Lashes",
+        "desc": "Lehký objem a přirozená nadýchanost. Ideální pro jemný, ale výraznější pohled."
       },
-      "wetEffect": {
-        "name": "Mokrý efekt",
-        "desc": "Lesklé „spikes“ z tenkých zavřených vějířků."
+      "3d": {
+        "name": "3D Lashes",
+        "desc": "Dokonalá harmonie objemu a elegance. Hustší, nadýchané řasy pro okouzlující pohled každý den."
       },
-      "4d5d": {
-        "name": "4D–5D",
-        "desc": "Objemové vějířky pro výraznou hustotu a hloubku."
+      "4d": {
+        "name": "4D Lashes",
+        "desc": "Luxusní objem a výraznost. Bohaté, nadýchané řasy, které zvýrazní krásu a hloubku Vašeho pohledu."
+      },
+      "5d": {
+        "name": "5D Lashes",
+        "desc": "Intenzivní objem a výjimečná hustota. Pro výrazný, okouzlující a nezapomenutelný pohled."
       },
       "volume": {
         "name": "Objem (Volume)",
-        "desc": "Vlastní mix objemů podle tvaru očí."
-      },
-      "removal": {
-        "name": "Odstranění řas",
-        "desc": "Šetrné profesionální odstranění bez poškození."
+        "desc": "Luxusní objem pro jedinečný vzhled. Maximální výraznost, úžasná hustota a podmanivý pohled."
       }
     },
     "eyebrow": "Ceník",

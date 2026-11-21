@@ -56,11 +56,11 @@
     "title": "Price list",
     "items": {
       "classic": "Classic",
-      "2d3d": "2D–3D",
-      "wetEffect": "Wet effect",
-      "4d5d": "4D–5D",
-      "volume": "Volume",
-      "removal": "Removal"
+      "2d": "2D Lashes",
+      "3d": "3D Lashes",
+      "4d": "4D Lashes",
+      "5d": "5D Lashes",
+      "volume": "Volume"
     },
     "note": "Prices in CZK."
   },
@@ -81,27 +81,27 @@
     "items": {
       "classic": {
         "name": "Classic",
-        "desc": "One extension per natural lash for a clean, natural look."
+        "desc": "Natural beauty in every glance. Delicate lash extensions for a soft and elegant look."
       },
-      "2d3d": {
-        "name": "2D / 3D",
-        "desc": "Small fans for a fuller line while keeping it lightweight."
+      "2d": {
+        "name": "2D Lashes",
+        "desc": "Light volume and natural fluffiness. Perfect for a soft yet beautifully defined look."
       },
-      "wetEffect": {
-        "name": "Wet effect",
-        "desc": "Glossy, spiky styling with thin closed fans."
+      "3d": {
+        "name": "3D Lashes",
+        "desc": "The perfect balance of volume and elegance. Fuller, fluffy lashes for a captivating everyday look."
       },
-      "4d5d": {
-        "name": "4D–5D",
-        "desc": "Volume fans for dramatic density and depth."
+      "4d": {
+        "name": "4D Lashes",
+        "desc": "Luxurious volume and definition. Full, fluffy lashes that enhance the beauty and depth of your eyes."
+      },
+      "5d": {
+        "name": "5D Lashes",
+        "desc": "Intense volume and incredible fullness. For a bold, glamorous and unforgettable look."
       },
       "volume": {
         "name": "Volume",
-        "desc": "Custom mix of volumes tailored to your eye shape."
-      },
-      "removal": {
-        "name": "Removal",
-        "desc": "Gentle professional removal without damage."
+        "desc": "Luxurious volume for a unique look. Maximum definition, stunning fullness and captivating eyes."
       }
     },
     "eyebrow": "Price list",
